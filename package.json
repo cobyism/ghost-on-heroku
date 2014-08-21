@@ -65,7 +65,8 @@
         "unidecode": "0.1.3",
         "validator": "3.4.0",
         "when": "3.2.3",
-        "xml": "0.0.12"
+        "xml": "0.0.12",
+        "pg": "latest"
     },
     "optionalDependencies": {
         "mysql": "2.1.1"

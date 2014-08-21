@@ -93,6 +93,7 @@ function builtFilesExist() {
             } else {
                 var err = new Error(errorMessage);
 
+                errorHelp = errorHelp + "\n" + fileName + " couldn’t be found :("
                 err.help = errorHelp;
                 deferred.reject(err);
             }
