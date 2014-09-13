@@ -152,6 +152,23 @@ function redirectToSetup(req, res, next) {
     });
 }
 
+// Detect uppercase in req.path
+function uncapitalise(req, res, next) {
+    var pathToTest = req.path,
+        isSignupOrReset = req.path.match(/(\/ghost\/(signup|reset)\/)/i);
+
+    if (isSignupOrReset) {
+        pathToTest = isSignupOrReset[1];
+    }
+
+    if (/[A-Z]/.test(pathToTest)) {
+        res.set('Cache-Control', 'public, max-age=' + utils.ONE_YEAR_S);
+        res.redirect(301, req.url.replace(pathToTest, pathToTest.toLowerCase()));
+    } else {
+        next();
+    }
+}
+
 function isSSLrequired(isAdmin) {
     var forceSSL = url.parse(config.url).protocol === 'https:' ? true : false,
         forceAdminSSL = (isAdmin && config.forceAdminSSL);
@@ -280,8 +297,9 @@ setupMiddleware = function (server) {
     // Serve robots.txt if not found in theme
     expressServer.use(robots());
 
-    // Add in all trailing slashes
+    // Handle trailing slashes and capitalization of routes
     expressServer.use(slashes(true, {headers: {'Cache-Control': 'public, max-age=' + utils.ONE_YEAR_S}}));
+    expressServer.use(uncapitalise);
 
     // Body parsing
     expressServer.use(bodyParser.json());
