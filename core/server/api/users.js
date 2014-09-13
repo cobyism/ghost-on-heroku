@@ -162,8 +162,14 @@ users = {
                                 parseInt(options.id, 10) === parseInt(options.context.user, 10)) {
                             return when.reject(new errors.NoPermissionError('You cannot change your own role.'));
                         } else if (roleId !== contextRoleId) {
-                            return canThis(options.context).assign.role(role).then(function () {
-                                return editOperation();
+                            return dataProvider.User.findOne({role: 'Owner'}).then(function (result) {
+                                if (parseInt(result.id, 10) !== parseInt(options.id, 10)) {
+                                    return canThis(options.context).assign.role(role).then(function () {
+                                        return editOperation();
+                                    });
+                                } else {
+                                    return when.reject(new errors.NoPermissionError('There has to be one owner.'));
+                                }
                             });
                         }
 
@@ -284,7 +290,12 @@ users = {
             return users.read(_.merge(options, { status: 'all'})).then(function (result) {
                 return dataProvider.Base.transaction(function (t) {
                     options.transacting = t;
-                    dataProvider.Post.destroyByAuthor(options).then(function () {
+
+                    when.join(
+                        dataProvider.Accesstoken.destroyByUser(options),
+                        dataProvider.Refreshtoken.destroyByUser(options),
+                        dataProvider.Post.destroyByAuthor(options)
+                    ).then(function () {
                         return dataProvider.User.destroy(options);
                     }).then(function () {
                         t.commit();

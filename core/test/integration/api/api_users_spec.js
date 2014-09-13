@@ -20,7 +20,7 @@ describe('Users API', function () {
     // Keep the DB clean
     before(testUtils.teardown);
 
-    beforeEach(testUtils.setup('users:roles', 'users', 'perms:user', 'perms:role', 'perms:setting', 'perms:init'));
+    beforeEach(testUtils.setup('users:roles', 'users', 'user:token', 'perms:user', 'perms:role', 'perms:setting', 'perms:init'));
     afterEach(testUtils.teardown);
 
     it('dateTime fields are returned as Date objects', function (done) {
@@ -85,7 +85,6 @@ describe('Users API', function () {
            }).catch(done);
         });
 
-        
         it('Can browse invited/invited-pending (admin)', function (done) {
             testUtils.fixtures.createInvitedUsers().then(function () {
                 UserAPI.browse(_.extend(testUtils.context.admin, { status: 'invited' })).then(function (response) {
@@ -850,6 +849,26 @@ describe('Users API', function () {
 
                             done();
                         }).catch(done);
+                });
+            });
+
+            it('CANNOT downgrade owner', function (done) {
+                var options = _.extend({}, context.admin, {id: userIdFor.owner}, {include: 'roles'});
+                UserAPI.read(options).then(function (response) {
+                    response.users[0].id.should.equal(userIdFor.owner);
+                    response.users[0].roles[0].name.should.equal('Owner');
+
+                    return UserAPI.edit(
+                        {users: [
+                            {name: newName, roles: [roleIdFor.author]}
+                        ]},
+                        options
+                    ).then(function (response) {
+                        done(new Error('Author should not be able to downgrade owner'));
+                    }).catch(function (error) {
+                        error.type.should.eql('NoPermissionError');
+                        done();
+                    });
                 });
             });
         });
