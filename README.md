@@ -12,7 +12,7 @@ Fill out the form, and you should be cooking with gas in a few seconds.
 
 ### Things you should know
 
-- After deployment, you’ll be redirected to the admin area at `YOURAPPNAME.herokuapp.com/ghost` to set up your blog.
+- After deployment, visit the admin area at `YOURAPPNAME.herokuapp.com/ghost` to set up your blog.
 
 - Your blog will be publicly accessible at `YOURAPPNAME.herokuapp.com`.
 
