@@ -18,7 +18,9 @@ Fill out the form, and you should be cooking with gas in a few seconds.
 
 - To make changes to your Ghost blog (like adding a theme to the `/content` directory, for instance), clone your blog locally using the [Heroku Toolbelt](https://toolbelt.heroku.com/):
 
-      heroku git:clone --app YOURAPPNAME
+  ```sh
+  heroku git:clone --app YOURAPPNAME
+  ```
 
 - **Image uploads [are disabled](https://github.com/cobyism/ghost-on-heroku/blob/master/config.js#L22)** when deployed to Heroku, since Heroku app filesystems [aren’t meant for permanent storage](https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem). If this is a problem for you, you should look into other ways to host your site.
 
