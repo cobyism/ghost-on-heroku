@@ -1,0 +1,22 @@
+{
+  "name": "ghost-on-heroku",
+  "description": "Just a blogging platform on Heroku.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/cobyism/ghost-on-heroku.git"
+  },
+  "bugs": "https://github.com/TryGhost/Ghost/issues",
+  "private": true,
+  "version": "0.5.7",
+  "dependencies": {
+    "ghost": "0.5.7",
+    "pg": "latest"
+  },
+  "engines": {
+    "node": "~0.10.0"
+  },
+  "scripts": {
+    "start": "node server.js"
+  }
+}

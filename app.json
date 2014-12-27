@@ -1,0 +1,17 @@
+{
+  "name": "Ghost on Heroku",
+  "description": "Just a blogging platform",
+  "logo": "https://raw.githubusercontent.com/TryGhost/Ghost/master/core/client/assets/img/large.png",
+  "repository": "https://github.com/cobyism/ghost-on-heroku",
+  "success_url": "/ghost",
+  "addons": [
+    "heroku-postgresql",
+    "mandrill"
+  ],
+  "env": {
+    "HEROKU_URL": {
+      "description": "The URL of this Heroku app.",
+      "value": "http://YOURAPPNAME.herokuapp.com"
+    }
+  }
+}
