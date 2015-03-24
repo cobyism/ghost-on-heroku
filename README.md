@@ -22,7 +22,7 @@ Fill out the form, and you should be cooking with gas in a few seconds.
   heroku git:clone --app YOURAPPNAME
   ```
 
-- **Image uploads [are disabled](https://github.com/cobyism/ghost-on-heroku/blob/master/config.js#L22)** when deployed to Heroku, since Heroku app filesystems [aren’t meant for permanent storage](https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem). If this is a problem for you, you should look into other ways to host your site.
+- **Image uploads [are disabled](https://github.com/cobyism/ghost-on-heroku/blob/master/config.js#L22)** when deployed to Heroku, since Heroku app filesystems [aren’t meant for permanent storage](https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem). If this is a problem for you, you should look into other ways to host your site. **Update:** Initial support [has landed](https://github.com/TryGhost/Ghost/commit/5c640e95f504e8a4fc638153b007034a4f3a6fcc) for supplying custom config for external storage (e.g. Amazon S3) when including Ghost as an NPM module. See [this discussion](https://github.com/TryGhost/Ghost/issues/4600) for an insight into what’s coming.
 
 ### How this works
 
