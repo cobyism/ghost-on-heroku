@@ -6,7 +6,7 @@ Ghost is a free, open, simple blogging platform. Visit the project's website at 
 
 To get your own Ghost blog running on Heroku, click the button below:
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/cobyism/ghost-on-heroku)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/ns11/ghost-on-heroku)
 
 Fill out the form, and you should be cooking with gas in a few seconds.
 
