@@ -2,10 +2,12 @@
 
 var path = require('path'),
     config,
-    storageConfig;
+    fileStorage,
+    storage;
 
 if (!!process.env.S3_ACCESS_KEY_ID) {
-  storageConfig = {
+  fileStorage = true
+  storage = {
     active: 'ghost-s3',
     'ghost-s3': {
       accessKeyId:     process.env.S3_ACCESS_KEY_ID,
@@ -16,7 +18,8 @@ if (!!process.env.S3_ACCESS_KEY_ID) {
     }
   }
 } else {
-  storageConfig = false
+  fileStorage = false
+  storage = {}
 }
 
 config = {
@@ -35,7 +38,8 @@ config = {
         }
       }
     },
-    fileStorage: storageConfig,
+    fileStorage: fileStorage,
+    storage: storage,
     database: {
       client: 'postgres',
       connection: process.env.DATABASE_URL,
