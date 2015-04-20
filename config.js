@@ -4,11 +4,11 @@ var path = require('path'),
     config,
     storageConfig;
 
-if (!!process.env.S3_ACCESS_KEY) {
+if (!!process.env.S3_ACCESS_KEY_ID) {
   storageConfig = {
     active: 'ghost-s3',
     'ghost-s3': {
-      accessKeyId:     process.env.S3_ACCESS_KEY,
+      accessKeyId:     process.env.S3_ACCESS_KEY_ID,
       secretAccessKey: process.env.S3_ACCESS_SECRET_KEY,
       bucket:          process.env.S3_BUCKET_NAME,
       region:          process.env.S3_BUCKET_REGION,
