@@ -8,9 +8,9 @@
   },
   "bugs": "https://github.com/TryGhost/Ghost/issues",
   "private": true,
-  "version": "0.5.10",
+  "version": "0.6.0",
   "dependencies": {
-    "ghost": "0.5.10",
+    "ghost": "0.6.0",
     "pg": "latest"
   },
   "engines": {
