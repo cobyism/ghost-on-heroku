@@ -1,7 +1,7 @@
 {
   "name": "Ghost on Heroku",
   "description": "Just a blogging platform",
-  "logo": "https://raw.githubusercontent.com/TryGhost/Ghost/master/core/client/assets/img/large.png",
+  "logo": "https://raw.githubusercontent.com/TryGhost/Ghost/master/core/client/public/assets/img/large.png",
   "repository": "https://github.com/cobyism/ghost-on-heroku",
   "success_url": "/ghost",
   "addons": [
