@@ -1,7 +1,24 @@
 // Ghost Configuration for Heroku
 
 var path = require('path'),
-    config;
+    config,
+    fileStorage,
+    storage;
+
+if (!!process.env.S3_ACCESS_KEY_ID) {
+  fileStorage = true
+  storage = {
+    active: 'ghost-s3',
+    'ghost-s3': {
+      accessKeyId:     process.env.S3_ACCESS_KEY_ID,
+      secretAccessKey: process.env.S3_ACCESS_SECRET_KEY,
+      bucket:          process.env.S3_BUCKET_NAME
+    }
+  }
+} else {
+  fileStorage = false
+  storage = {}
+}
 
 config = {
 
@@ -19,7 +36,8 @@ config = {
         }
       }
     },
-    fileStorage: false,
+    fileStorage: fileStorage,
+    storage: storage,
     database: {
       client: 'postgres',
       connection: process.env.DATABASE_URL,
