@@ -11,12 +11,13 @@
     4.  General
     5.  Single Post
     6.  Tag Archive
-    7.  Third Party Elements
-    8.  Pagination
-    9.  Footer
-    10. Media Queries (Tablet)
-    11. Media Queries (Mobile)
-    12. Animations
+    7.  Read Next
+    8.  Third Party Elements
+    9.  Pagination
+    10.  Footer
+    11. Media Queries (Tablet)
+    12. Media Queries (Mobile)
+    13. Animations
 
 */
 
@@ -159,6 +160,9 @@ table { border-collapse: collapse; border-spacing: 0; }
 }
 .icon-link:before {
     content: "\f608";
+}
+.icon-menu:before {
+    content: "\f609";
 }
 
 
@@ -324,7 +328,7 @@ blockquote cite {
 blockquote cite a { font-weight: normal; }
 
 mark {
-    background-color: #FFC336;
+    background-color: #fdffb6;
 }
 
 code, tt {
@@ -686,7 +690,7 @@ body.nav-opened .nav {
     right: 30px;
     height: 38px;
     padding: 0 20px;
-    color: #111 !important;
+    color: #111 !important; /* Overides `.nav a:link, .nav a:visited` colour */
     text-align: center;
     font-size: 12px;
     font-family: "Open Sans", sans-serif;
@@ -754,12 +758,12 @@ body.nav-opened .nav {
     display: none
 }
 
-/* Appears in the top right corner of your home page */
+/* Appears in the top left corner of your home page */
 .blog-logo {
     display: block;
     float: left;
-    background: none !important;
-    border: none !important;
+    background: none !important; /* Makes sure there is never a background */
+    border: none !important; /* Makes sure there is never a border */
 }
 
 .blog-logo img {
@@ -780,37 +784,63 @@ body.nav-opened .nav {
     float: right;
     height: 38px;
     padding: 0 15px;
-    border: #bfc8cd 1px solid;
+    border-style: solid;
+    border-width: 1px;
     opacity: 1;
-    color: #9EABB3;
     text-align: center;
     font-size: 12px;
     text-transform: uppercase;
     line-height: 35px;
     white-space: nowrap;
     border-radius: 3px;
-    background: rgba(0,0,0,0.1);
     transition: all 0.5s ease;
+}
+.menu-button:before {
+    font-size: 12px;
+    font-weight: bold;
+    margin-right: 6px;
+    position: relative;
+    top: 1px;
+}
+.menu-button:hover {
+    background: #fff;
 }
 .menu-button:focus {
     outline: 0;
 }
-.menu-button .burger {
-    font-size: 12px;
-    margin-right: 6px;
+
+/* When the navigation is closed */
+.nav-closed .menu-button {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.6);
+}
+.nav-closed .menu-button:hover {
+    color: #222;
 }
 
-body.nav-opened .menu-button {
+/* When the navigation is closed and there is no cover image */
+.nav-closed .no-cover .menu-button {
+    border-color: #BFC8CD;
+    color: #9EABB3;
+}
+.nav-closed .no-cover .menu-button:hover {
+    border-color: #555;
+    color: #555;
+}
+
+/* When the navigation is opened */
+.nav-opened .menu-button {
     padding: 0 12px;
-    background: #111 !important;
-    border-color: #111 !important;
-    color: #fff !important;
+    background: #111;
+    border-color: #111;
+    color: #fff;
     -webkit-transform: translate3D(94px, 0, 0);
         -ms-transform: translate3D(94px, 0, 0);
             transform: translate3D(94px, 0, 0);
     transition: all 0.3s ease;
 }
-body.nav-opened .menu-button .word {
+
+.nav-opened .menu-button .word {
     opacity: 0;
     transition: all 0.3s ease;
 }
@@ -825,29 +855,8 @@ body.nav-opened .menu-button .word {
     border: none;
     background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%,rgba(0,0,0,0) 100%);
 }
-.no-cover .main-nav.overlay,
-.no-cover .menu-button {
+.no-cover .main-nav.overlay {
     background: none;
-}
-
-.main-nav.overlay a {
-    color: #fff;
-}
-
-.main-nav.overlay .menu-button {
-    border-color: rgba(255,255,255,0.6);
-}
-
-.main-nav.overlay a:hover {
-    color: #222;
-    border-color: #fff;
-    background: #fff;
-}
-
-/* Add a border to the buttons on hover */
-.menu-button:hover {
-    border-color: #555;
-    color: #555;
 }
 
 /* The details of your blog. Defined in ghost/settings/ */
@@ -882,11 +891,6 @@ body.nav-opened .menu-button .word {
 
 .no-cover .page-description {
     color: rgba(0,0,0,0.5);
-}
-
-.no-cover .main-nav.overlay .menu-button {
-    color: rgba(0,0,0,0.4);
-    border-color: rgba(0,0,0,0.3);
 }
 
 /* Add subtle load-in animation for content on the home page */
@@ -1091,6 +1095,20 @@ body:not(.post-template) .post-title {
     -ms-transform: translateX(-50%); /* for IE9 */
     transform: translateX(-50%);
 }
+
+.footnotes {
+    font-style: italic;
+    font-size: 1.3rem;
+}
+
+.footnotes li {
+    margin: 0.6rem 0;
+}
+
+.footnotes p {
+    margin: 0;
+}
+
 
 /* The author credit area after the post */
 .post-footer {
@@ -1299,8 +1317,126 @@ body:not(.post-template) .post-title {
     display: none;
 }
 
+
 /* ==========================================================================
-   7. Third Party Elements - Embeds from other services
+   7. Read More - Next/Prev Post Links
+   ========================================================================== */
+
+.middle {
+
+}
+.read-next {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: stretch;
+    -webkit-align-items: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    margin-top: 10rem;
+    margin-bottom: calc(-8rem - 37px);
+}
+
+.read-next-story {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    text-decoration: none;
+    position: relative;
+    text-align: center;
+    color: #fff;
+    background: #222 no-repeat center center;
+    background-size: cover;
+    overflow: hidden;
+}
+.read-next-story:hover:before {
+    background: rgba(0,0,0,0.8);
+    transition: all 0.2s ease;
+}
+.read-next-story:hover .post:before {
+    color: #222;
+    background: #fff;
+    transition: all 0.2s ease;
+}
+
+.read-next-story:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,0.7);
+    transition: all 0.5s ease;
+}
+
+.read-next-story .post {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+}
+
+.read-next-story .post:before {
+    content: "Read This Next";
+    padding: 4px 10px 5px;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    font-family: "Open Sans", sans-serif;
+    color: rgba(255,255,255,0.8);
+    border: rgba(255,255,255,0.5) 1px solid;
+    border-radius: 4px;
+    transition: all 0.5s ease;
+}
+.read-next-story.prev .post:before {
+    content: "You Might Enjoy";
+}
+
+.read-next-story h2 {
+    margin-top: 1rem;
+    color: #fff;
+}
+
+.read-next-story p {
+    margin: 0;
+    color: rgba(255,255,255,0.8);
+}
+
+/* Special styles for posts with no cover images */
+.read-next-story.no-cover {
+    background: #f5f8fa;
+}
+
+.read-next-story.no-cover:before {
+    display: none;
+}
+
+.read-next-story.no-cover .post:before {
+    color: rgba(0,0,0,0.5);
+    border-color: rgba(0,0,0,0.2);
+}
+
+.read-next-story.no-cover h2 {
+    color: rgba(0,0,0,0.8);
+}
+
+.read-next-story.no-cover p {
+    color: rgba(0,0,0,0.5);
+}
+
+/* if there are two posts without covers, put a border between them */
+.read-next-story.no-cover + .read-next-story.no-cover {
+    border-left: rgba(0,0,100,0.04) 1px solid;
+}
+
+
+/* ==========================================================================
+   8. Third Party Elements - Embeds from other services
    ========================================================================== */
 
 /* Github */
@@ -1320,8 +1456,9 @@ body:not(.post-template) .post-title {
     margin-bottom: 1.75em;
 }
 
+
 /* ==========================================================================
-   8. Pagination - Tools to let you flick between pages
+   9. Pagination - Tools to let you flick between pages
    ========================================================================== */
 
 /* The main wrapper for our pagination links */
@@ -1407,14 +1544,13 @@ body:not(.post-template) .post-title {
 
 
 /* ==========================================================================
-   9. Footer - The bottom of every page
+   10. Footer - The bottom of every page
    ========================================================================== */
 
 .site-footer {
     position: relative;
     margin: 8rem 0 0 0;
-    padding: 0.5rem 15px;
-    border-top: #EBF2F6 1px solid;
+    padding: 1rem 15px;
     font-family: "Open Sans", sans-serif;
     font-size: 1rem;
     line-height: 1.75em;
@@ -1428,7 +1564,7 @@ body:not(.post-template) .post-title {
 }
 
 .site-footer a:hover {
-    color: #50585D;
+    border-bottom: #bbc7cc 1px solid;
 }
 
 .poweredby {
@@ -1446,7 +1582,7 @@ body:not(.post-template) .post-title {
 
 
 /* ==========================================================================
-   10. Media Queries - Smaller than 900px
+   11. Media Queries - Smaller than 900px
    ========================================================================== */
 
 @media only screen and (max-width: 900px) {
@@ -1562,11 +1698,29 @@ body:not(.post-template) .post-title {
         padding: 0;
     }
 
+    .read-next {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        margin-top: 4rem;
+    }
+
+    .read-next p {
+        display: none;
+    }
+
+    .read-next-story.no-cover + .read-next-story.no-cover {
+        border-top: rgba(0,0,100,0.06) 1px solid;
+        border-left: none;
+    }
+
 }
 
 
 /* ==========================================================================
-   11. Media Queries - Smaller than 500px
+   12. Media Queries - Smaller than 500px
    ========================================================================== */
 
 @media only screen and (max-width: 500px) {
@@ -1612,8 +1766,8 @@ body:not(.post-template) .post-title {
         background: none;
     }
     body.nav-opened .menu-button {
-        background: none !important;
-        border: transparent !important;
+        background: none;
+        border: transparent;
     }
 
     .main-nav.overlay a:hover {
@@ -1731,11 +1885,6 @@ body:not(.post-template) .post-title {
         font-size: 2.5rem;
     }
 
-    .post-template .post {
-        padding-bottom: 0;
-        margin-bottom: 0;
-    }
-
     .post-template .site-footer {
         margin-top: 0;
     }
@@ -1821,11 +1970,20 @@ body:not(.post-template) .post-title {
         display: none;
     }
 
+    .read-next {
+        margin-top: 2rem;
+        margin-bottom: -37px;
+    }
+
+    .read-next .post {
+        width: 100%;
+    }
+
 }
 
 
 /* ==========================================================================
-   12. Animations
+   13. Animations
    ========================================================================== */
 
 /* Used to fade in title/desc on the home page */
