@@ -22,6 +22,14 @@ Fill out the form, and you should be cooking with gas in a few seconds.
   heroku git:clone --app YOURAPPNAME
   ```
 
+### What do I put in the fields?
+
+- **App name**. Pick a name for your application. Heroku says this field is optional, but it’s easier if you choose a name here, because you need to specify the URL of your blog in the first config field anyway. You can add a custom domain later if you want, but this is the name of the application you’ll see in your Heroku dashboard.
+
+- **Heroku URL**. Take the name of your Heroku application, and put it into URL form. For example, if you choose `my-ghost-blog` as the app name, the Heroku URL config value needs to be `http://my-ghost-blog.herokuapp.com` (no trailing slash). If you subsequently set up a [custom domain](https://devcenter.heroku.com/articles/custom-domains) for your blog, you’ll need to update your Ghost blog’s `HEROKU_URL` environment variable accordingly.
+
+- **S3 configuration**. All the config fields begining with `S3_…` are completely optional, and leaving them blank is totally fine. See the section below on file uploads for details.
+
 ### File uploads
 
 Heroku app filesystems [aren’t meant for permanent storage](https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem), so when it comes to file uploads for a Ghost blog deployed to Heroku, you have two options:
