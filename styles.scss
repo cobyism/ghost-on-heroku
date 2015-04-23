@@ -1,0 +1,156 @@
+---
+---
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  color: #444;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+h1 {
+  font-family: "Lora", "Georgia", serif;
+}
+
+header {
+  $color-1: #24c6dc;
+  $color-2: #514a9d;
+  background: -webkit-linear-gradient(55deg, $color-1 10%, $color-2 90%); /* Chrome 10+, Saf5.1+ */
+  background:    -moz-linear-gradient(55deg, $color-1 10%, $color-2 90%); /* FF3.6+ */
+  background:     -ms-linear-gradient(55deg, $color-1 10%, $color-2 90%); /* IE10 */
+  background:      -o-linear-gradient(55deg, $color-1 10%, $color-2 90%); /* Opera 11.10+ */
+  background:         linear-gradient(55deg, $color-1 10%, $color-2 90%); /* W3C */
+
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+
+  a {
+    color: #fff;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(#fff, .3);
+  }
+}
+
+.icons {
+  margin-top: 2rem;
+}
+
+.lead {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.overlap {
+  margin-top: 1.5rem;
+  margin-bottom: -1.75rem;
+}
+
+section {
+  padding-top: 1.5rem;
+}
+
+h1,
+h2 {
+  font-weight: normal;
+}
+
+p {
+  line-height: 1.3;
+}
+
+a {
+  color: #2a5db0;
+  text-decoration: none;
+}
+
+.btn {
+  display: inline-block;
+  font-weight: normal;
+  padding: .5em .8em;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.1);
+  $btn-bg: #7056BF;
+  border: 1px solid darken($btn-bg, 15%);
+  background: $btn-bg;
+  background: -webkit-linear-gradient(lighten($btn-bg, 10%), darken($btn-bg, 10%));
+  background: -moz-linear-gradient(lighten($btn-bg, 10%), darken($btn-bg, 10%));
+  background: -o-linear-gradient(lighten($btn-bg, 10%), darken($btn-bg, 10%));
+  background: -ms-linear-gradient(lighten($btn-bg, 10%), darken($btn-bg, 10%));
+  background: linear-gradient(lighten($btn-bg, 10%), darken($btn-bg, 10%));
+   $shadow:
+    inset 0 1px 0 rgba(#fff, .2),
+    0 1px 1px rgba(0,0,0,0.2);
+  -webkit-box-shadow: $shadow;
+  box-shadow: $shadow;
+  -webkit-transition: background-image .5s;
+
+  -webkit-animation-name: btnPulse;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+}
+
+section,
+footer {
+  p {
+    color: #666;
+  }
+}
+
+@media screen and (min-width: 420px){
+  .btn {
+    font-size: 1.25rem;
+
+    img {
+      width: 26px;
+      height: 26px;
+    }
+  }
+
+  .overlap {
+    margin-bottom: -2rem;
+  }
+}
+
+@media screen and (min-width: 420px){
+  header {
+    font-size: 1.1rem;
+  }
+}
+
+@media screen and (min-width: 740px){
+  header {
+    font-size: 1.3rem;
+  }
+}
+
+@-webkit-keyframes btnPulse {
+  from {
+    $shadow:
+      inset 0 1px 0 rgba(#fff, .2),
+      0 1px 1px rgba(0,0,0,0.2);
+    -webkit-box-shadow: $shadow;
+    box-shadow: $shadow;
+  }
+  50% {
+    $shadow:
+      inset 0 1px 0 rgba(#fff, .2),
+      0 0 20px rgba(#7b00ff, 0.75);
+    -webkit-box-shadow: $shadow;
+    box-shadow: $shadow;
+  }
+  to {
+    $shadow:
+      inset 0 1px 0 rgba(#fff, .2),
+      0 1px 1px rgba(0,0,0,0.2);
+    -webkit-box-shadow: $shadow;
+    box-shadow: $shadow;
+  }
+}
