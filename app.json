@@ -24,6 +24,10 @@
     "S3_BUCKET_NAME": {
       "description": "Name of your S3 bucket on AWS, if using S3 file storage.",
       "required": false
+    },
+    "S3_BUCKET_REGION": {
+      "description": "Region of your S3 bucket on AWS, if using S3 file storage.",
+      "required": false
     }
   }
 }

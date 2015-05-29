@@ -34,7 +34,7 @@ Fill out the form, and you should be cooking with gas in a few seconds.
 
 Heroku app filesystems [aren’t meant for permanent storage](https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem), so when it comes to file uploads for a Ghost blog deployed to Heroku, you have two options:
 
-- **Configure S3 file storage.** Create an S3 bucket on Amazon AWS, and then specify your `S3_ACCESS_KEY_ID`, `S3_ACCESS_SECRET_KEY`, and `S3_BUCKET_NAME` as environment variables on Heroku’s deployment page. Once your app is up and running, you’ll be able to upload images via the Ghost UI and they’ll be stored in Amazon S3. :sparkles:
+- **Configure S3 file storage.** Create an S3 bucket on Amazon AWS, and then specify your `S3_ACCESS_KEY_ID`, `S3_ACCESS_SECRET_KEY`, `S3_BUCKET_NAME` and `S3_BUCKET_REGION` as environment variables on Heroku’s deployment page. Once your app is up and running, you’ll be able to upload images via the Ghost UI and they’ll be stored in Amazon S3. :sparkles:
 
 - **Disable file uploads.** Leave all the S3-related environment variable fields blank on Heroku’s deployment page and file uploads will be disabled. Ghost will ask you for external URLs instead of allowing images to be uploaded. If you don’t know what S3 is, this is the option you want.
 
