@@ -12,7 +12,8 @@ if (!!process.env.S3_ACCESS_KEY_ID) {
     'ghost-s3': {
       accessKeyId:     process.env.S3_ACCESS_KEY_ID,
       secretAccessKey: process.env.S3_ACCESS_SECRET_KEY,
-      bucket:          process.env.S3_BUCKET_NAME
+      bucket:          process.env.S3_BUCKET_NAME,
+      region:          process.env.S3_BUCKET_REGION
     }
   }
 } else {
