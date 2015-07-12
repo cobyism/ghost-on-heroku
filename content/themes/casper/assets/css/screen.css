@@ -107,11 +107,11 @@ table { border-collapse: collapse; border-spacing: 0; }
 /* Import the font file with the icons in it */
 @font-face {
     font-family: "casper-icons";
-    src:url("../fonts/casper-icons.eot");
-    src:url("../fonts/casper-icons.eot?#iefix") format("embedded-opentype"),
-        url("../fonts/casper-icons.woff") format("woff"),
-        url("../fonts/casper-icons.ttf") format("truetype"),
-        url("../fonts/casper-icons.svg#icons") format("svg");
+    src:url("../fonts/casper-icons.eot?v=1");
+    src:url("../fonts/casper-icons.eot?v=1#iefix") format("embedded-opentype"),
+        url("../fonts/casper-icons.woff?v=1") format("woff"),
+        url("../fonts/casper-icons.ttf?v=1") format("truetype"),
+        url("../fonts/casper-icons.svg?v=1#icons") format("svg");
     font-weight: normal;
     font-style: normal;
 }
@@ -164,6 +164,11 @@ table { border-collapse: collapse; border-spacing: 0; }
 .icon-menu:before {
     content: "\f609";
 }
+/*
+    IMPORTANT: When making any changes to the icon font, be sure to increment
+    the version number by 1 in the @font-face rule. `?v=1` becomes `?v=2`
+    This forces browsers to download the new font file.
+*/
 
 
 /* ==========================================================================
@@ -916,10 +921,6 @@ body.nav-opened .nav {
     padding-bottom: 4rem;
     border-bottom: #EBF2F6 1px solid;
     word-wrap: break-word;
-    -moz-hyphens: auto;
-    -ms-hyphens: auto;
-    -webkit-hyphens: auto;
-    hyphens: auto;
 }
 
 /* Add a little circle in the middle of the border-bottom on our .post
@@ -1099,6 +1100,7 @@ body:not(.post-template) .post-title {
 .footnotes {
     font-style: italic;
     font-size: 1.3rem;
+    line-height: 1.6em;
 }
 
 .footnotes li {
@@ -1107,6 +1109,10 @@ body:not(.post-template) .post-title {
 
 .footnotes p {
     margin: 0;
+}
+
+.footnotes p a:last-child {
+    text-decoration: none;
 }
 
 
@@ -1180,8 +1186,14 @@ body:not(.post-template) .post-title {
     text-decoration: none;
 }
 
-.post-footer .share a:hover {
-    color: #50585D;
+.post-footer .share .icon-twitter:hover {
+    color: #55acee;
+}
+.post-footer .share .icon-facebook:hover {
+    color: #3b5998;
+}
+.post-footer .share .icon-google-plus:hover {
+    color: #dd4b39;
 }
 
 
@@ -1322,9 +1334,6 @@ body:not(.post-template) .post-title {
    7. Read More - Next/Prev Post Links
    ========================================================================== */
 
-.middle {
-
-}
 .read-next {
     display: -webkit-box;
     display: -webkit-flex;
@@ -1335,7 +1344,6 @@ body:not(.post-template) .post-title {
     -ms-flex-align: stretch;
     align-items: stretch;
     margin-top: 10rem;
-    margin-bottom: calc(-8rem - 37px);
 }
 
 .read-next-story {
@@ -1347,6 +1355,7 @@ body:not(.post-template) .post-title {
     -webkit-flex-grow: 1;
     -ms-flex-positive: 1;
     flex-grow: 1;
+    min-width: 50%;
     text-decoration: none;
     position: relative;
     text-align: center;
@@ -1434,6 +1443,14 @@ body:not(.post-template) .post-title {
     border-left: rgba(0,0,100,0.04) 1px solid;
 }
 
+/* Correctly position site-footer when next to the .read-next container */
+.read-next + .site-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+}
 
 /* ==========================================================================
    8. Third Party Elements - Embeds from other services
@@ -1756,7 +1773,7 @@ body:not(.post-template) .post-title {
     .menu-button {
         padding: 0 5px;
         border-radius: 0;
-        border-color: transparent;
+        border-width: 0;
         color: #2e2e2e;
         background: transparent;
     }
