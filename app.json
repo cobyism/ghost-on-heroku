@@ -6,7 +6,7 @@
   "success_url": "/ghost",
   "addons": [
     "heroku-postgresql",
-    "mandrill"
+    "mailgun"
   ],
   "env": {
     "HEROKU_URL": {
