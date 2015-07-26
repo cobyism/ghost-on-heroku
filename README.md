@@ -22,23 +22,29 @@ Fill out the form, and you should be cooking with gas in a few seconds.
   heroku git:clone --app YOURAPPNAME
   ```
 
-### What do I put in the fields?
+### What do I put in the deployment and environment variable fields?
 
-- **App name**. Pick a name for your application. Heroku says this field is optional, but it’s easier if you choose a name here, because you need to specify the URL of your blog in the first config field anyway. You can add a custom domain later if you want, but this is the name of the application you’ll see in your Heroku dashboard.
+- **App name (required)**. Pick a name for your application. Heroku says this field is optional, but it’s easier if you choose a name here, because you need to specify the URL of your blog in the first config field anyway. You can add a custom domain later if you want, but this is the name of the application you’ll see in your Heroku dashboard.
 
-- **Heroku URL**. Take the name of your Heroku application, and put it into URL form. For example, if you choose `my-ghost-blog` as the app name, the Heroku URL config value needs to be `http://my-ghost-blog.herokuapp.com` (no trailing slash). If you subsequently set up a [custom domain](https://devcenter.heroku.com/articles/custom-domains) for your blog, you’ll need to update your Ghost blog’s `HEROKU_URL` environment variable accordingly.
+- **Heroku URL (required)**. Take the name of your Heroku application, and put it into URL form. For example, if you choose `my-ghost-blog` as the app name, the Heroku URL config value needs to be `http://my-ghost-blog.herokuapp.com` (no trailing slash). If you subsequently set up a [custom domain](https://devcenter.heroku.com/articles/custom-domains) for your blog, you’ll need to update your Ghost blog’s `HEROKU_URL` environment variable accordingly.
 
-- **S3 configuration**. All the config fields begining with `S3_…` are completely optional, and leaving them blank is totally fine. See the section below on file uploads for details.
+#### Using with file uploads disabled
 
-### File uploads
+Heroku app filesystems [aren’t meant for permanent storage](https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem), so file uploads are disabled by default when using this repository to deploy a Ghost blog to Heroku. If you’re using Ghost on Heroku with S3 file uploads disabled, you should leave all environment variables beginning with `S3_…` blank.
 
-Heroku app filesystems [aren’t meant for permanent storage](https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem), so when it comes to file uploads for a Ghost blog deployed to Heroku, you have two options:
+#### Configuring S3 file uploads
 
-- **Configure S3 file storage.** Create an S3 bucket on Amazon AWS, and then specify your `S3_ACCESS_KEY_ID`, `S3_ACCESS_SECRET_KEY`, `S3_BUCKET_NAME` and `S3_BUCKET_REGION` as environment variables on Heroku’s deployment page. Once your app is up and running, you’ll be able to upload images via the Ghost UI and they’ll be stored in Amazon S3. :sparkles:
+To configure S3 file storage, create an S3 bucket on Amazon AWS, and then specify the following details as environment variables on the Heroku deployment page (or add these environment variables to your app after deployment via the Heroku dashboard):
 
-- **Disable file uploads.** Leave all the S3-related environment variable fields blank on Heroku’s deployment page and file uploads will be disabled. Ghost will ask you for external URLs instead of allowing images to be uploaded. If you don’t know what S3 is, this is the option you want.
+- `S3_ACCESS_KEY_ID` and `S3_ACCESS_SECRET_KEY`: **Required if using S3 uploads**. These fields are the AWS key/secret pair needed to authenticate with Amazon S3. You must have granted this keypair sufficient permissions on the S3 bucket in question in order for S3 uploads to work.
 
-_**ProTip™**: You can start off with file uploads disabled, and specify all your S3 environment variables at a later stage. You aren’t stuck with the decision you make on the original deploy. :grin:_
+- `S3_BUCKET_NAME`: **Required if using S3 uploads**. This is the name you gave to your S3 bucket.
+
+- `S3_BUCKET_REGION`: **Required if using S3 uploads**. Specify the region the bucket has been created in, using slug format (e.g. `us-east-1`, `eu-west-1`). A full list of S3 regions is [available here](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region).
+
+- `S3_ASSET_HOST`: Optional, even if using S3 uploads. Use this variable to specify the S3 bucket URL in virtual host style, path style or using a custom domain. See [this page](http://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html) for details.
+
+Once your app is up and running with these variables in place, you should be able to upload images via the Ghost interface and they’ll be stored in Amazon S3. :sparkles:
 
 ### How this works
 
