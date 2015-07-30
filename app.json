@@ -11,7 +11,7 @@
   "env": {
     "HEROKU_URL": {
       "description": "The URL of this Heroku app.",
-      "value": "http://YOURAPPNAME.herokuapp.com"
+      "value": "https://YOURAPPNAME.herokuapp.com"
     },
     "S3_ACCESS_KEY_ID": {
       "description": "Set your AWS Access Key ID to enable S3 file storage. Leave blank to disable file uploads.",
