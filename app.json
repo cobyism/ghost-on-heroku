@@ -32,6 +32,11 @@
     "S3_ASSET_HOST_URL": {
       "description": "Optional custom CDN asset host url, if using S3 file storage.",
       "required": false
+    },
+    "PGSSLMODE": {
+      "description": "PostgreSQL SSL connection mode. Set to 'require' to force SSL. Unset it to use the default.",
+      "required": false,
+      "value": "require"
     }
   }
 }
