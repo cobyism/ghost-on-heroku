@@ -10,7 +10,7 @@
   "private": true,
   "version": "0.6.4",
   "dependencies": {
-    "ghost": "0.6.4",
+    "ghost": "0.7.0",
     "ghost-s3-storage": "~0.2.1",
     "pg": "latest"
   },
