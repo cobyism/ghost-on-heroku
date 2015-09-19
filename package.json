@@ -8,7 +8,7 @@
   },
   "bugs": "https://github.com/TryGhost/Ghost/issues",
   "private": true,
-  "version": "0.6.4",
+  "version": "0.7.0",
   "dependencies": {
     "ghost": "0.7.0",
     "ghost-s3-storage": "~0.2.1",
