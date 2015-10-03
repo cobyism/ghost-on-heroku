@@ -19,7 +19,7 @@ Fill out the form, and you should be cooking with gas in a few seconds.
 - To make changes to your Ghost blog (like adding a theme to the `/content` directory, for instance), clone your blog locally using the [Heroku Toolbelt](https://toolbelt.heroku.com/):
 
   ```sh
-  heroku git:clone --app YOURAPPNAME
+  heroku clone --app YOURAPPNAME
   ```
 
 ### What do I put in the deployment and environment variable fields?
@@ -49,6 +49,19 @@ Once your app is up and running with these variables in place, you should be abl
 ### How this works
 
 This repository is essentially a minimal web application that specifies [Ghost as a dependency](https://github.com/TryGhost/Ghost/wiki/Using-Ghost-as-an-NPM-module), and makes a deploy button available.
+
+
+## Updating
+
+After deploying your own ghost blog, you can update it by running the following commands:
+<pre><code>heroku clone --app YOURAPPNAME && cd YOURAPPNAME
+git remote add origin https://github.com/cobyism/ghost-on-heroku
+git pull origin master # may trigger a few merge conflicts, depending on how long since last update
+git push heroku master
+</code></pre>
+
+This will pull down the code that was deployed to heroku so you have it locally, attach this repository as a new remote, attempt to pull down the latest version and merge it in, and then push that change back to your heroku app instance.  
+
 
 ## Problems?
 
