@@ -19,7 +19,7 @@ Fill out the form, and you should be cooking with gas in a few seconds.
 - To make changes to your Ghost blog (like adding a theme to the `/content` directory, for instance), clone your blog locally using the [Heroku Toolbelt](https://toolbelt.heroku.com/):
 
   ```sh
-  heroku clone --app YOURAPPNAME
+  heroku git:clone --app YOURAPPNAME
   ```
 
 ### What do I put in the deployment and environment variable fields?
