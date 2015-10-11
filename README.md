@@ -55,7 +55,7 @@ This repository is essentially a minimal web application that specifies [Ghost a
 
 After deploying your own Ghost blog, you can update it by running the following commands:
 ```
-heroku clone --app YOURAPPNAME && cd YOURAPPNAME
+heroku git:clone --app YOURAPPNAME && cd YOURAPPNAME
 git remote add origin https://github.com/cobyism/ghost-on-heroku
 git pull origin master # may trigger a few merge conflicts, depending on how long since last update
 git push heroku master
