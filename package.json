@@ -11,7 +11,7 @@
   "version": "0.7.0",
   "dependencies": {
     "ghost": "0.7.0",
-    "ghost-s3-storage": "~0.2.1",
+    "ghost-s3-storage": "c2industries/ghost-s3",
     "pg": "latest"
   },
   "engines": {

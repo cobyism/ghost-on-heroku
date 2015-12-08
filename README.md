@@ -34,6 +34,13 @@ Heroku app filesystems [aren’t meant for permanent storage](https://devcenter.
 
 #### Configuring S3 file uploads
 
+#### Bucketeer Add-on
+
+This project will automatically detect if you have provisioned the Bucketeer add-on (included by default)
+and configure S3 for you.
+
+#### Manual Configuration
+
 To configure S3 file storage, create an S3 bucket on Amazon AWS, and then specify the following details as environment variables on the Heroku deployment page (or add these environment variables to your app after deployment via the Heroku dashboard):
 
 - `S3_ACCESS_KEY_ID` and `S3_ACCESS_SECRET_KEY`: **Required if using S3 uploads**. These fields are the AWS key/secret pair needed to authenticate with Amazon S3. You must have granted this keypair sufficient permissions on the S3 bucket in question in order for S3 uploads to work.
@@ -61,7 +68,7 @@ git pull origin master # may trigger a few merge conflicts, depending on how lon
 git push heroku master
 ```
 
-This will pull down the code that was deployed to Heroku so you have it locally, attach this repository as a new remote, attempt to pull down the latest version and merge it in, and then push that change back to your Heroku app instance.  
+This will pull down the code that was deployed to Heroku so you have it locally, attach this repository as a new remote, attempt to pull down the latest version and merge it in, and then push that change back to your Heroku app instance.
 
 
 ## Problems?
