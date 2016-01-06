@@ -38,6 +38,10 @@ Heroku app filesystems [aren’t meant for permanent storage](https://devcenter.
 
 You can provision the [Bucketeer add-on](https://devcenter.heroku.com/articles/bucketeer) to get an S3 bucket. The environement variables set by the add-on will automatically get detected and used to configure Ghost. This will cost at least $5/mo.
 
+  ```sh
+  heroku addons:create bucketeer --app YOURAPPNAME
+  ```
+
 ##### Provisiong a bucket directly
 
 You can also create an S3 bucket on Amazon AWS and then specify the following details as environment variables on the Heroku deployment page (or add these environment variables to your app after deployment via the Heroku dashboard):
