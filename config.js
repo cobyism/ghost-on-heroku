@@ -5,6 +5,12 @@ var path = require('path'),
     fileStorage,
     storage;
 
+if (!!process.env.BUCKETEER_AWS_ACCESS_KEY_ID) {
+  process.env.S3_ACCESS_KEY_ID     = process.env.BUCKETEER_AWS_ACCESS_KEY_ID;
+  process.env.S3_ACCESS_SECRET_KEY = process.env.BUCKETEER_AWS_SECRET_ACCESS_KEY;
+  process.env.S3_BUCKET_NAME       = process.env.BUCKETEER_BUCKET_NAME;
+}
+
 if (!!process.env.S3_ACCESS_KEY_ID) {
   fileStorage = true
   storage = {
