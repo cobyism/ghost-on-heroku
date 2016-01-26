@@ -17,6 +17,18 @@ if (!!process.env.S3_ACCESS_KEY_ID) {
       assetHost:       process.env.S3_ASSET_HOST_URL
     }
   }
+} else if (!!process.env.BUCKETEER_AWS_ACCESS_KEY_ID) {
+  fileStorage = true
+  storage = {
+    active: 'ghost-s3',
+    'ghost-s3': {
+      accessKeyId:     process.env.BUCKETEER_AWS_ACCESS_KEY_ID,
+      secretAccessKey: process.env.BUCKETEER_AWS_SECRET_ACCESS_KEY,
+      bucket:          process.env.BUCKETEER_BUCKET_NAME,
+      region:          process.env.S3_BUCKET_REGION,
+      assetHost:       process.env.S3_ASSET_HOST_URL
+    }
+  }
 } else {
   fileStorage = false
   storage = {}

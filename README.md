@@ -46,6 +46,19 @@ To configure S3 file storage, create an S3 bucket on Amazon AWS, and then specif
 
 Once your app is up and running with these variables in place, you should be able to upload images via the Ghost interface and they’ll be stored in Amazon S3. :sparkles:
 
+##### Provisioning an S3 bucket using an add-on
+
+If you’d prefer not to configure S3 manually, you can provision the [Bucketeer add-on](https://devcenter.heroku.com/articles/bucketeer)
+to get an S3 bucket (Bucketeer starts at $5/mo).
+
+To configure S3 via Bucketeer, leave all the S3 deployment fields blank and deploy your
+Ghost blog. Once your blog is deployed, run the following commands from your terminal:
+
+    heroku addons:create bucketeer --app YOURAPPNAME
+
+The environment variables set by the add-on will be automatically detected and used to
+configure your Ghost blog and enable uploads.
+
 ### How this works
 
 This repository is essentially a minimal web application that specifies [Ghost as a dependency](https://github.com/TryGhost/Ghost/wiki/Using-Ghost-as-an-NPM-module), and makes a deploy button available.
@@ -61,7 +74,7 @@ git pull origin master # may trigger a few merge conflicts, depending on how lon
 git push heroku master
 ```
 
-This will pull down the code that was deployed to Heroku so you have it locally, attach this repository as a new remote, attempt to pull down the latest version and merge it in, and then push that change back to your Heroku app instance.  
+This will pull down the code that was deployed to Heroku so you have it locally, attach this repository as a new remote, attempt to pull down the latest version and merge it in, and then push that change back to your Heroku app instance.
 
 
 ## Problems?
