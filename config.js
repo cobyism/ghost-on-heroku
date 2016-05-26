@@ -3,7 +3,8 @@
 var path = require('path'),
     config,
     fileStorage,
-    storage;
+    storage,
+    mail;
 
 if (!!process.env.S3_ACCESS_KEY_ID) {
   fileStorage = true
@@ -34,21 +35,36 @@ if (!!process.env.S3_ACCESS_KEY_ID) {
   storage = {}
 }
 
+if (!!process.env.GMAIL_SMTP_LOGIN) {
+  mail = {
+    transport: 'SMTP',
+    options: {
+      service: 'Gmail',
+      auth: {
+        user: process.env.GMAIL_SMTP_LOGIN,
+        pass: process.env.GMAIL_SMTP_PASSWORD
+      }
+    }
+  }
+} else if (!!process.env.MAILGUN_SMTP_LOGIN) {
+  mail = {
+    transport: 'SMTP',
+    options: {
+      service: 'Mailgun',
+      auth: {
+        user: process.env.MAILGUN_SMTP_LOGIN,
+        pass: process.env.MAILGUN_SMTP_PASSWORD
+      }
+    }
+  }
+}
+
 config = {
 
   // Production (Heroku)
   production: {
     url: process.env.HEROKU_URL,
-    mail: {
-      transport: 'SMTP',
-      options: {
-        service: 'Mailgun',
-        auth: {
-          user: process.env.MAILGUN_SMTP_LOGIN,
-          pass: process.env.MAILGUN_SMTP_PASSWORD
-        }
-      }
-    },
+    mail: mail,
     fileStorage: fileStorage,
     storage: storage,
     database: {
