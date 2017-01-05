@@ -38,7 +38,7 @@ config = {
 
   // Production (Heroku)
   production: {
-    url: process.env.HEROKU_URL,
+    url: "https://www.thinkful.com/blog/",
     mail: {
       transport: 'SMTP',
       options: {
