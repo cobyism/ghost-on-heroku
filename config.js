@@ -39,6 +39,7 @@ config = {
   // Production (Heroku)
   production: {
     url: "https://www.thinkful.com/blog/",
+    forceAdminSSL: true,
     mail: {
       transport: 'SMTP',
       options: {
