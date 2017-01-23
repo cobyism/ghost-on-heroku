@@ -11,7 +11,7 @@
   "version": "0.11.3",
   "dependencies": {
     "casper": "TryGhost/Casper#1.3.4",
-    "ghost": "0.11.3",
+    "ghost": "0.11.4",
     "ghost-s3-storage-adapter": "3.0.4",
     "ncp": "^2.0.0",
     "pg": "latest"
