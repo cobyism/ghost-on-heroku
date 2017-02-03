@@ -10,7 +10,7 @@
   "private": true,
   "version": "0.11.4",
   "dependencies": {
-    "casper": "TryGhost/Casper#1.3.4",
+    "casper": "TryGhost/Casper#1.3.5",
     "ghost": "0.11.4",
     "ghost-s3-storage-adapter": "3.0.4",
     "ncp": "^2.0.0",
