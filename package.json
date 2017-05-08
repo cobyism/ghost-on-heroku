@@ -17,7 +17,7 @@
     "pg": "latest"
   },
   "engines": {
-    "node": "6.10.3"
+    "node": "^4.2.0 || ^6.9.0"
   },
   "scripts": {
     "postinstall": "ncp node_modules/casper content/themes/casper",
