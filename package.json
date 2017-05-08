@@ -10,7 +10,7 @@
   "private": true,
   "version": "0.11.8",
   "dependencies": {
-    "casper": "TryGhost/Casper#1.3.6",
+    "casper": "https://github.com/blaze33/Casper.git",
     "ghost": "0.11.8",
     "ghost-s3-storage-adapter": "3.0.4",
     "ncp": "^2.0.0",
