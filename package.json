@@ -8,16 +8,16 @@
   },
   "bugs": "https://github.com/TryGhost/Ghost/issues",
   "private": true,
-  "version": "0.11.3",
+  "version": "0.11.8",
   "dependencies": {
-    "casper": "TryGhost/Casper#1.3.4",
-    "ghost": "0.11.3",
+    "casper": "TryGhost/Casper#1.3.6",
+    "ghost": "0.11.8",
     "ghost-s3-storage-adapter": "3.0.4",
     "ncp": "^2.0.0",
     "pg": "latest"
   },
   "engines": {
-    "node": "~0.12.0"
+    "node": "^4.2.0 || ^6.9.0"
   },
   "scripts": {
     "postinstall": "ncp node_modules/casper content/themes/casper",
