@@ -52,8 +52,8 @@ config = {
     fileStorage: fileStorage,
     storage: storage,
     database: {
-      client: 'postgres',
-      connection: process.env.DATABASE_URL,
+      client: 'mysql',
+      connection: process.env.CLEARDB_DATABASE_URL,
       debug: false
     },
     server: {

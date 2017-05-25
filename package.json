@@ -13,8 +13,7 @@
     "casper": "TryGhost/Casper#1.3.6",
     "ghost": "0.11.8",
     "ghost-s3-storage-adapter": "3.0.4",
-    "ncp": "^2.0.0",
-    "pg": "latest"
+    "ncp": "^2.0.0"
   },
   "engines": {
     "node": "^4.2.0 || ^6.9.0"
