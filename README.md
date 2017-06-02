@@ -20,6 +20,9 @@ Fill out the form, and you should be cooking with gas in a few seconds.
 
   ```sh
   heroku git:clone --app YOURAPPNAME
+  cd YOURAPPNAME
+  git remote add origin https://github.com/cobyism/ghost-on-heroku
+  git pull origin master
   ```
 
 ### What do I put in the deployment and environment variable fields?
