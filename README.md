@@ -2,6 +2,10 @@
 
 Ghost is a free, open, simple blogging platform. Visit the project's website at <http://ghost.org>, or read the docs on <http://support.ghost.org>.
 
+## Note regarding Ghost version 1.X
+
+The latest releases of Ghost dropped support for a couple of things that complicate one-button deployment on Heroku (see issues #90 and #91 for background). Until we can establish the best way to support deploying the latest version of Ghost to Heroku, this repository will remain at v0.11.11. If you have suggestions, please open an issue or pull request. In the meantime, thank you for your patience.
+
 ## Deploying on Heroku
 
 To get your own Ghost blog running on Heroku, click the button below:
