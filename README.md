@@ -4,33 +4,39 @@ Ghost is a free, open, simple blogging platform. Visit the project's website at 
 
 ## Note regarding Ghost version 1.X
 
-The latest releases of Ghost dropped support for a couple of things that complicate one-button deployment on Heroku (see issues #90 and #91 for background). Until we can establish the best way to support deploying the latest version of Ghost to Heroku, this repository will remain at v0.11.11. If you have suggestions, please open an issue or pull request. In the meantime, thank you for your patience.
+The latest release of Ghost is now supported! Changes include:
+
+  * Requires MySQL database, available through two add-ons,
+    * [JawsDB](https://elements.heroku.com/addons/jawsdb)
+    * [ClearDB](https://elements.heroku.com/addons/cleardb)
+  * S3 storage adapter had been updated but should be compatible
+  * `HEROKU_URL` config var renamed to `PUBLIC_URL` to avoid using Heroku's namespace
+  * removed **Deploy to Heroku** button because it does not support cloning back to local machine
 
 ## Deploying on Heroku
 
-To get your own Ghost blog running on Heroku, click the button below:
+```bash
+git clone https://github.com/cobyism/ghost-on-heroku
+cd ghost-on-heroku
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/cobyism/ghost-on-heroku)
+heroku create YOURAPPNAME
+heroku addons:create jawsdb
+heroku addons:create mailgun
+heroku config:set PUBLIC_URL=https://YOURAPPNAME.herokuapp.com
 
-Fill out the form, and you should be cooking with gas in a few seconds.
+git push heroku master
+
+heroku run 'knex-migrator init --mgpath node_modules/ghost
+heroku restart
+```
 
 ### Things you should know
 
-- After deployment, visit the admin area at `YOURAPPNAME.herokuapp.com/ghost` to set up your blog.
-
+- After deployment,
+  * you nay beed to upgrade the database add-on to have enough connections
+  * visit the admin area at `https://YOURAPPNAME.herokuapp.com/ghost` to set up your blog.
 - Your blog will be publicly accessible at `YOURAPPNAME.herokuapp.com`.
-
-- To make changes to your Ghost blog (like adding a theme to the `/content` directory, for instance), clone your blog locally using the [Heroku Toolbelt](https://toolbelt.heroku.com/):
-
-  ```sh
-  heroku git:clone --app YOURAPPNAME
-  ```
-
-### What do I put in the deployment and environment variable fields?
-
-- **App name (required)**. Pick a name for your application. Heroku says this field is optional, but it’s easier if you choose a name here, because you need to specify the URL of your blog in the first config field anyway. You can add a custom domain later if you want, but this is the name of the application you’ll see in your Heroku dashboard.
-
-- **Heroku URL (required)**. Take the name of your Heroku application, and put it into URL form. For example, if you choose `my-ghost-blog` as the app name, the Heroku URL config value needs to be `http://my-ghost-blog.herokuapp.com` (no trailing slash). If you subsequently set up a [custom domain](https://devcenter.heroku.com/articles/custom-domains) for your blog, you’ll need to update your Ghost blog’s `HEROKU_URL` environment variable accordingly.
+- If you subsequently set up a [custom domain](https://devcenter.heroku.com/articles/custom-domains) for your blog, you’ll need to update your Ghost blog’s `PUBLIC_URL` environment variable accordingly.
 
 #### Using with file uploads disabled
 

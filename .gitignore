@@ -1,4 +1,5 @@
 node_modules/
 npm-debug.log*
 
-content/themes/casper/
+content/logs/
+config.production.json
