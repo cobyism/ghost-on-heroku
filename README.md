@@ -12,6 +12,7 @@ The latest release of Ghost is now supported! Changes include:
   * S3 storage adapter had been updated but should be compatible
   * `HEROKU_URL` config var renamed to `PUBLIC_URL` to avoid using Heroku's namespace
   * removed **Deploy to Heroku** button because it does not support cloning back to local machine
+  * now uses [Node cluster API](https://nodejs.org/dist/latest-v6.x/docs/api/cluster.html) to scale across processor cores in larger dynos
 
 ## Deploying on Heroku
 
