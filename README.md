@@ -27,7 +27,7 @@ heroku config:set PUBLIC_URL=https://YOURAPPNAME.herokuapp.com
 
 git push heroku master
 
-heroku run 'knex-migrator init --mgpath node_modules/ghost
+heroku run 'knex-migrator init --mgpath node_modules/ghost'
 heroku restart
 ```
 

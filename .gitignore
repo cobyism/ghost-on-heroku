@@ -1,6 +1,7 @@
 node_modules/
 npm-debug.log*
 
+content/data/
 content/logs/
 config.production.json
 content/data/ghost-local.db

@@ -8,11 +8,11 @@
   },
   "bugs": "https://github.com/TryGhost/Ghost/issues",
   "private": true,
-  "version": "1.5.0",
+  "version": "1.7.1",
   "dependencies": {
-    "casper": "github:tryghost/Casper#2.0.2",
-    "ghost": "^1.5.0",
-    "ghost-storage-adapter-s3": "^2.1.0"
+    "casper": "github:tryghost/Casper#2.0.3",
+    "ghost": "^1.7.1",
+    "ghost-storage-adapter-s3": "^2.3.0"
   },
   "engines": {
     "node": "6.11.x"
