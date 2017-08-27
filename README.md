@@ -11,7 +11,6 @@ The latest release of Ghost is now supported! Changes include:
     * [ClearDB](https://elements.heroku.com/addons/cleardb)
   * S3 storage adapter had been updated but should be compatible
   * `HEROKU_URL` config var renamed to `PUBLIC_URL` to avoid using Heroku's namespace
-  * removed **Deploy to Heroku** button because it does not support cloning back to local machine
   * now uses [Node cluster API](https://nodejs.org/dist/latest-v6.x/docs/api/cluster.html) to scale across processor cores in larger dynos
 
 ## Deploying on Heroku
@@ -23,6 +22,7 @@ cd ghost-on-heroku
 heroku create YOURAPPNAME
 heroku addons:create jawsdb
 heroku addons:create mailgun
+heroku addons:create bucketeer # optional for file uploads
 heroku config:set PUBLIC_URL=https://YOURAPPNAME.herokuapp.com
 
 git push heroku master
@@ -34,7 +34,7 @@ heroku restart
 ### Things you should know
 
 - After deployment,
-  * you nay beed to upgrade the database add-on to have enough connections
+  * you may need to upgrade the database add-on to have enough connections
   * visit the admin area at `https://YOURAPPNAME.herokuapp.com/ghost` to set up your blog.
 - Your blog will be publicly accessible at `YOURAPPNAME.herokuapp.com`.
 - If you subsequently set up a [custom domain](https://devcenter.heroku.com/articles/custom-domains) for your blog, you’ll need to update your Ghost blog’s `PUBLIC_URL` environment variable accordingly.
