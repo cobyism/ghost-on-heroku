@@ -3,6 +3,9 @@
   "description": "Just a blogging platform",
   "logo": "https://cdn.rawgit.com/TryGhost/Ghost-Admin/61fe83dff375a145d5272a5382aa2c72bd994830/public/assets/img/large.png",
   "repository": "https://github.com/cobyism/ghost-on-heroku",
+  "scripts": {
+    "postdeploy": "bin/init-deployment"
+  },
   "success_url": "/ghost",
   "addons": [
     "jawsdb",

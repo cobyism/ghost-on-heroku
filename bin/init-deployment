@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+knex-migrator init --mgpath node_modules/ghost
