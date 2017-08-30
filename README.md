@@ -2,42 +2,25 @@
 
 Ghost is a free, open, simple blogging platform. Visit the project's website at <http://ghost.org>, or read the docs on <http://support.ghost.org>.
 
-## Note regarding Ghost version 1.X
+## Ghost version 1.X
 
 The latest release of Ghost is now supported! Changes include:
 
-  * Requires MySQL database, available through two add-ons,
-    * [JawsDB](https://elements.heroku.com/addons/jawsdb)
+  * Requires MySQL database, available through either of two add-ons:
+    * [JawsDB](https://elements.heroku.com/addons/jawsdb) (deploy default)
     * [ClearDB](https://elements.heroku.com/addons/cleardb)
-  * S3 storage adapter had been updated but should be compatible
   * `HEROKU_URL` config var renamed to `PUBLIC_URL` to avoid using Heroku's namespace
-  * now uses [Node cluster API](https://nodejs.org/dist/latest-v6.x/docs/api/cluster.html) to scale across processor cores in larger dynos
 
-## Deploying on Heroku
-
-```bash
-git clone https://github.com/cobyism/ghost-on-heroku
-cd ghost-on-heroku
-
-heroku create YOURAPPNAME
-heroku addons:create jawsdb
-heroku addons:create mailgun
-heroku addons:create bucketeer # optional for file uploads
-heroku config:set PUBLIC_URL=https://YOURAPPNAME.herokuapp.com
-
-git push heroku master
-
-heroku run 'knex-migrator init --mgpath node_modules/ghost'
-heroku restart
-```
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 ### Things you should know
 
-- After deployment,
-  * you may need to upgrade the database add-on to have enough connections
-  * visit the admin area at `https://YOURAPPNAME.herokuapp.com/ghost` to set up your blog.
-- Your blog will be publicly accessible at `YOURAPPNAME.herokuapp.com`.
-- If you subsequently set up a [custom domain](https://devcenter.heroku.com/articles/custom-domains) for your blog, you’ll need to update your Ghost blog’s `PUBLIC_URL` environment variable accordingly.
+After deployment,
+- First, visit Ghost at `https://YOURAPPNAME.herokuapp.com/ghost` to set up your admin account
+- The app may take a few minutes to come to life
+- Your blog will be publicly accessible at `https://YOURAPPNAME.herokuapp.com`
+- If you subsequently set up a [custom domain](https://devcenter.heroku.com/articles/custom-domains) for your blog, you’ll need to update your Ghost blog’s `PUBLIC_URL` environment variable accordingly
+- If you create much content or decide to scale-up the dynos to support more traffic, a more substantial, paid database plan will be required.
 
 #### Using with file uploads disabled
 
@@ -72,20 +55,32 @@ configure your Ghost blog and enable uploads.
 
 ### How this works
 
-This repository is essentially a minimal web application that specifies [Ghost as a dependency](https://github.com/TryGhost/Ghost/wiki/Using-Ghost-as-an-NPM-module), and makes a deploy button available.
+This repository is a [Node.js](https://nodejs.org) web application that specifies [Ghost as a dependency](https://docs.ghost.org/v1.0.0/docs/using-ghost-as-an-npm-module), and makes a deploy button available.
 
+  * Ghost and Casper theme versions are declared in the Node app's [`package.json`](package.json)
+  * Scales across processor cores in larger dynos via [Node cluster API](https://nodejs.org/dist/latest-v6.x/docs/api/cluster.html)
 
-## Updating
+## Updating source code
 
-After deploying your own Ghost blog, you can update it by running the following commands:
+Optionally after deployment, to push Ghost upgrades or work with source code, clone this repo (or a fork) and connect it with the Heroku app:
+
+```bash
+git clone https://github.com/cobyism/ghost-on-heroku
+cd ghost-on-heroku
+
+heroku git:remote -a YOURAPPNAME
+heroku info
 ```
-heroku git:clone --app YOURAPPNAME && cd YOURAPPNAME
-git remote add origin https://github.com/cobyism/ghost-on-heroku
-git pull origin master # may trigger a few merge conflicts, depending on how long since last update
+
+Then you can push commits to the Heroku app, triggering new deployments:
+
+```bash
+git add .
+git commit -m "Important changes"
 git push heroku master
 ```
 
-This will pull down the code that was deployed to Heroku so you have it locally, attach this repository as a new remote, attempt to pull down the latest version and merge it in, and then push that change back to your Heroku app instance.
+See more about [deploying to Heroku with git](https://devcenter.heroku.com/articles/git).
 
 
 ## Problems?

@@ -1,8 +1,12 @@
+#!/usr/bin/env node
 // Ghost Configuration for Heroku
 
 var fs = require('fs');
 var path = require('path');
 var url = require('url');
+
+var envValues = require('./common/env-values');
+var appRoot = path.join(__dirname, '..');
 
 function createConfig() {
   var fileStorage, storage;
@@ -56,7 +60,7 @@ function createConfig() {
     storage: storage,
     database: {
       client: 'mysql',
-      connection: getMysqlConfig(process.env.JAWSDB_URL || process.env.CLEARDB_DATABASE_URL),
+      connection: getMysqlConfig(envValues.mysqlDatabaseUrl),
       debug: false
     },
     server: {
@@ -64,7 +68,7 @@ function createConfig() {
       port: process.env.PORT
     },
     paths: {
-      contentPath: path.join(__dirname, '/content/')
+      contentPath: path.join(appRoot, '/content/')
     }
   };
 
@@ -102,4 +106,4 @@ function getMysqlConfig(connectionUrl) {
 }
 
 var configContents = JSON.stringify(createConfig(), null, 2);
-fs.writeFileSync(path.join(__dirname, 'config.production.json'), configContents);
+fs.writeFileSync(path.join(appRoot, 'config.production.json'), configContents);
