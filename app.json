@@ -3,14 +3,17 @@
   "description": "Just a blogging platform",
   "logo": "https://cdn.rawgit.com/TryGhost/Ghost-Admin/61fe83dff375a145d5272a5382aa2c72bd994830/public/assets/img/large.png",
   "repository": "https://github.com/cobyism/ghost-on-heroku",
+  "scripts": {
+    "postdeploy": "bin/init-deployment"
+  },
   "success_url": "/ghost",
   "addons": [
-    "heroku-postgresql",
+    "jawsdb",
     "mailgun"
   ],
   "env": {
-    "HEROKU_URL": {
-      "description": "The URL of this Heroku app.",
+    "PUBLIC_URL": {
+      "description": "The HTTPS URL of this app: either your custom domain or default 'herokuapp.com' hostname.",
       "value": "https://YOURAPPNAME.herokuapp.com"
     },
     "S3_ACCESS_KEY_ID": {
@@ -32,11 +35,6 @@
     "S3_ASSET_HOST_URL": {
       "description": "Optional custom CDN asset host url, if using S3 file storage.",
       "required": false
-    },
-    "PGSSLMODE": {
-      "description": "PostgreSQL SSL connection mode. Set to 'require' to force SSL. Unset it to use the default.",
-      "required": false,
-      "value": "require"
     }
   }
 }

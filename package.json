@@ -8,19 +8,17 @@
   },
   "bugs": "https://github.com/TryGhost/Ghost/issues",
   "private": true,
-  "version": "0.11.11",
+  "version": "1.7.1",
   "dependencies": {
-    "casper": "TryGhost/Casper#1.3.7",
-    "ghost": "0.11.11",
-    "ghost-s3-storage-adapter": "3.0.4",
-    "ncp": "^2.0.0",
-    "pg": "latest"
+    "casper": "github:tryghost/Casper#2.1.0",
+    "ghost": "^1.8.0",
+    "ghost-storage-adapter-s3": "^2.3.0",
+    "mysql": "^2.14.1"
   },
   "engines": {
-    "node": "^4.8.4 || ^6.11.1"
+    "node": "6.11.x"
   },
   "scripts": {
-    "postinstall": "ncp node_modules/casper content/themes/casper",
     "start": "node server.js"
   }
 }
