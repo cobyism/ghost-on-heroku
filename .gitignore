@@ -1,4 +1,7 @@
 node_modules/
 npm-debug.log*
 
-content/themes/casper/
+content/data/*.db
+content/logs/
+config.production.json
+content/data/ghost-local.db
