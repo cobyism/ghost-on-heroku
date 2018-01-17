@@ -48,10 +48,14 @@ to get an S3 bucket (Bucketeer starts at $5/mo).
 To configure S3 via Bucketeer, leave all the S3 deployment fields blank and deploy your
 Ghost blog. Once your blog is deployed, run the following commands from your terminal:
 
-    heroku addons:create bucketeer --app YOURAPPNAME
+```bash
+# Provision an Amazon S3 bucket
+heroku addons:create bucketeer --app YOURAPPNAME
 
-The environment variables set by the add-on will be automatically detected and used to
-configure your Ghost blog and enable uploads.
+# Additionally, the bucket's region must be set to formulate correct URLs
+# (Find the "Region" in your Bucketeer Add-on's web dashboard.)
+heroku config:set S3_BUCKET_REGION=us-east-1 --app YOURAPPNAME
+```
 
 ### How this works
 
