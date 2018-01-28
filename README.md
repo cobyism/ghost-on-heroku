@@ -6,7 +6,7 @@ Ghost is a free, open, simple blogging platform. Visit the project's website at 
 
 To get your own Ghost blog running on Heroku, click the button below:
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/cobyism/ghost-on-heroku)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/cobyism/ghost-on-heroku/tree/ghost-0.11.x)
 
 Fill out the form, and you should be cooking with gas in a few seconds.
 
@@ -70,8 +70,9 @@ After deploying your own Ghost blog, you can update it by running the following 
 ```
 heroku git:clone --app YOURAPPNAME && cd YOURAPPNAME
 git remote add origin https://github.com/cobyism/ghost-on-heroku
-git pull origin master # may trigger a few merge conflicts, depending on how long since last update
-git push heroku master
+git checkout ghost-0.11.x
+git pull origin ghost-0.11.x # may trigger a few merge conflicts, depending on how long since last update
+git push heroku ghost-0.11.x:master
 ```
 
 This will pull down the code that was deployed to Heroku so you have it locally, attach this repository as a new remote, attempt to pull down the latest version and merge it in, and then push that change back to your Heroku app instance.
