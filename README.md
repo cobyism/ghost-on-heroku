@@ -84,8 +84,56 @@ git commit -m "Important changes"
 git push heroku master
 ```
 
+Watch the app's server-side behavior to see errors and request traffic:
+
+```bash
+heroku logs -t
+```
+
 See more about [deploying to Heroku with git](https://devcenter.heroku.com/articles/git).
 
+### Upgrading Ghost
+
+On each deployment, the Heroku Node/npm build process will **auto-upgrade Ghost to the newest 1.x version**. To prevent this behavior, use npm 5+ (or yarn) to create a lockfile.
+
+```bash
+npm install
+git add package-lock.json
+git commit -m 'Lock dependencies'
+git push heroku master
+```
+
+Now, future deployments will always use the same set of dependencies.
+
+To update to newer versions:
+
+```
+npm update
+git add package-lock.json
+git commit -m 'Update dependencies'
+git push heroku master
+```
+
+### Database migrations
+
+Newer versions of Ghost frequently require changes to the database. These changes are automated with a process called **database migrations**.
+
+After upgrading Ghost, you may see errors logged like:
+
+> DatabaseIsNotOkError: Migrations are missing. Please run knex-migrator migrate.
+
+To resolve this error, run the pending migrations and restart to get the app back on-line:
+
+```bash
+heroku run knex-migrator migrate --mgpath node_modules/ghost
+heroku restart
+```
+
+This can be automated by adding the following line to `Procfile`:
+
+```
+release: knex-migrator migrate --mgpath node_modules/ghost
+```
 
 ## Problems?
 
