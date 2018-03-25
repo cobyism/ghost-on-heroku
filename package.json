@@ -19,6 +19,7 @@
     "node": "6.11.x"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "postinstall": "knex-migrator migrate --mgpath node_modules/ghost"
   }
 }
