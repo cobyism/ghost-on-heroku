@@ -1,0 +1,75 @@
+{{!< default}}
+
+{{#author}}
+<header id="blog-header"{{#if cover_image}} class="has-cover"{{else}}{{#if @blog.cover_image}} class="has-cover"{{/if}}{{/if}}>
+	<div class="inner">
+		<nav id="navigation">
+			{{#if @blog.logo}}
+			<span class="blog-logo">
+				<a href="{{@blog.url}}"><img src="{{@blog.logo}}" alt="{{t "Blog Logo"}}" /></a>
+			</span>
+			{{else}}
+			<span id="home-button" class="nav-button">
+				<a class="home-button" href="{{@blog.url}}" title="{{t "Home"}}"><i class="ic ic-arrow-left"></i> {{t "Home"}}</a>
+			</span>
+			{{/if}}
+			{{#if @blog.navigation}}
+			<span id="menu-button" class="nav-button">
+				<a class="menu-button"><i class="ic ic-menu"></i> {{t "Menu"}}</a>
+			</span>
+			{{/if}}
+		</nav>
+		{{#if cover_image}}
+		<div class="blog-cover cover" style="background-image: url('{{img_url cover_image}}');"></div>
+		{{else}}
+		{{#if @blog.cover_image}}
+		<div class="blog-cover cover" style="background-image: url('{{img_url @blog.cover}}');"></div>
+		{{/if}}
+		{{/if}}
+	</div>
+</header>
+
+<section id="blog-author"{{#if cover_image}} class="has-cover"{{else}}{{#if @blog.cover_image}} class="has-cover"{{/if}}{{/if}}>
+	<div class="inner">
+
+		<aside class="post-author">
+			<figure class="post-author-avatar avatar">
+				{{#if profile_image}}
+					<img src="{{profile_image}}" alt="{{name}}" />
+				{{/if}}
+			</figure>
+			<div class="post-author-bio">
+				<h2 class="post-author-name">{{name}}</h2>
+				{{#if bio}}
+					<p class="post-author-about">{{{bio}}}</p>
+				{{/if}}
+				<span class="post-author-stats"><i class="ic ic-pencil"></i> {{plural ../pagination.total empty=(t "No Posts") singular=(t "% Post") plural=(t "% Posts")}}</span>
+				{{#if location}}
+					<span class="post-author-location"><i class="ic ic-location"></i> {{location}}</span>
+				{{/if}}
+				{{#if website}}
+					<span class="post-author-website"><i class="ic ic-link"></i> <a href="{{website}}">{{t "Website"}}</a></span>
+				{{/if}}
+				{{#if twitter}}
+					<span class="post-author-twitter"><i class="ic ic-twitter"></i> <a target="_blank" href="https://twitter.com/{{twitter}}">Twitter</a></span>
+				{{/if}}
+				{{#if facebook}}
+					<span class="post-author-facebook"><i class="ic ic-facebook"></i> <a target="_blank" href="https://facebook.com/{{facebook}}">Facebook</a></span>
+				{{/if}}
+			</div>
+			<div class="clear"></div>
+		</aside>
+	</div>
+</section>
+
+{{/author}}
+
+<div id="index" class="container">
+
+	<main class="content" role="main">
+
+		{{> "loop"}}
+
+	</main>
+
+</div>
