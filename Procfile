@@ -1,1 +1,1 @@
-web: bin/runsvdir-dyno
+web: bin/start-nginx npm start --production

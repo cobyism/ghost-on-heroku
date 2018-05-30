@@ -5,9 +5,6 @@
   "repository": "https://github.com/WeConnect/ghost-on-heroku",
   "buildpacks": [
     {
-      "url": "https://github.com/danp/heroku-buildpack-runit.git"
-    },
-    {
       "url": "https://github.com/WeConnect/nginx-buildpack.git"
     },
     {
