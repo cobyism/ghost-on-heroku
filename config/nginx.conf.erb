@@ -1,5 +1,5 @@
 daemon off;
-#Heroku dynos have at least 4 cores.
+# Heroku dynos have at least 4 cores.
 worker_processes <%= ENV['NGINX_WORKERS'] || 4 %>;
 
 events {
@@ -23,7 +23,7 @@ http {
   default_type application/octet-stream;
   sendfile on;
 
-  #Must read the body in 5 seconds.
+  # Must read the body in 5 seconds.
   client_body_timeout <%= ENV['NGINX_CLIENT_BODY_TIMEOUT'] || 5 %>;
 
   upstream app_server {
@@ -37,8 +37,8 @@ http {
     client_max_body_size <%= ENV['NGINX_CLIENT_MAX_BODY_SIZE'] || 1 %>M;
 
     location / {
-      auth_request      /auth
-      auth_request_set  $auth_status $upstream_status;
+      # auth_request      /auth
+      # auth_request_set  $auth_status $upstream_status;
       proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
       proxy_set_header  Host $http_host;
       proxy_redirect    off;
@@ -47,7 +47,7 @@ http {
 
     location = /auth {
       internal;
-      proxy_pass              http://auth-server;
+      proxy_pass              https://id.wework.com;
       proxy_pass_request_body off;
       proxy_set_header        Content-Length "";
       proxy_set_header        X-Original-URI $request_uri;
