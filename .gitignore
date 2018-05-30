@@ -7,3 +7,4 @@ config.production.json
 content/data/ghost-local.db
 
 package-lock.json
+.env
