@@ -21,6 +21,15 @@ if (cluster.isMaster) {
   // Run Ghost in each worker / processor core.
   ghost().then(function (ghostServer) {
     //
+    parentApp.listen('/tmp/nginx.socket', function () {
+      if (process.env.DYNO) {
+        console.log('This is on Heroku..!!');
+        fs.openSync('/tmp/app-initialized', 'w');
+      }
+
+      console.log('Node server started on ' + port + ' at ' + Date(new Date()));
+    });
+
     parentApp.use(utils.getSubdir(), ghostServer.rootApp);
     //
     ghostServer.start(parentApp).then(function () {
