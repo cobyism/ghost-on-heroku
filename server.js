@@ -22,15 +22,18 @@ if (cluster.isMaster) {
   ghost().then(function (ghostServer) {
     //
     parentApp
+      .get('/test', function (req, res) {
+        res.send('GET request to the test page')
+      })
       .use(utils.getSubdir(), ghostServer.rootApp)
-      .listen('/tmp/nginx.socket', function () {
-        if (process.env.DYNO) {
-          console.log('This is on Heroku!!');
-          // fs.openSync('/tmp/app-initialized', 'w');
-        }
+      // .listen('/tmp/nginx.socket', function () {
+      //   if (process.env.DYNO) {
+      //     console.log('This is on Heroku!!');
+      //     // fs.openSync('/tmp/app-initialized', 'w');
+      //   }
 
-        console.log('Node server started on ' + process.env.PORT + ' at ' + Date(new Date()));
-      });
+      //   console.log('Node server started on ' + process.env.PORT + ' at ' + Date(new Date()));
+      // });
 
     //
     ghostServer.start(parentApp).then(function () {
