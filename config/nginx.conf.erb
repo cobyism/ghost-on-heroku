@@ -10,8 +10,13 @@ events {
 
 http {
   gzip on;
-  gzip_comp_level 2;
-  gzip_min_length 512;
+  gzip_comp_level 3;
+  gzip_min_length 150;
+  gzip_proxied any;
+  gzip_types text/plain text/css text/json text/javascript
+    application/javascript application/x-javascript application/json
+    application/rss+xml application/vnd.ms-fontobject application/x-font-ttf
+    application/xml font/opentype image/svg+xml text/xml;
 
   server_tokens off;
 
@@ -36,21 +41,16 @@ http {
     keepalive_timeout 5;
     client_max_body_size <%= ENV['NGINX_CLIENT_MAX_BODY_SIZE'] || 1 %>M;
 
+    root /app; # path to your app
+
     location / {
       # auth_request      /auth
       # auth_request_set  $auth_status $upstream_status;
+      proxy_set_header  X-Real-IP $remote_addr;
       proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
       proxy_set_header  Host $http_host;
       proxy_redirect    off;
       proxy_pass        http://app_server;
-    }
-
-    location = /auth {
-      internal;
-      proxy_pass              https://id.wework.com;
-      proxy_pass_request_body off;
-      proxy_set_header        Content-Length "";
-      proxy_set_header        X-Original-URI $request_uri;
     }
   }
 }
