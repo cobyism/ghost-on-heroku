@@ -27,7 +27,7 @@ if (cluster.isMaster) {
         fs.openSync('/tmp/app-initialized', 'w');
       }
 
-      console.log('Node server started on ' + port + ' at ' + Date(new Date()));
+      console.log('Node server started on ' + process.env.PORT + ' at ' + Date(new Date()));
     });
 
     parentApp.use(utils.getSubdir(), ghostServer.rootApp);
