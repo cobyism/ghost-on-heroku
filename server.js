@@ -1,6 +1,7 @@
 var fs = require('fs');
 var cluster = require('cluster');
 var ghost = require('ghost');
+var utils = require('./node_modules/ghost/core/server/services/url/utils');
 var express = require('express');
 var parentApp = express();
 
@@ -19,7 +20,8 @@ if (cluster.isMaster) {
 } else {
   // Run Ghost in each worker / processor core.
   ghost().then(function (ghostServer) {
-    parentApp.use(ghostServer.config.paths.subdir, ghostServer.rootApp);
+    //
+    parentApp.use(utils.getSubdir(), ghostServer.rootApp);
     //
     ghostServer.start(parentApp).then(function () {
       // write nginx tmp
