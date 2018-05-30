@@ -1,5 +1,10 @@
 var ghost = require('ghost');
 var cluster = require('cluster');
+// var express = require('express');
+// var parentApp = express();
+
+// var passport = require('passport');
+// var GoogleStrategy = require('passport-google-oauth').OAuthStrategy;
 
 // Heroku sets `WEB_CONCURRENCY` to the number of available processor cores.
 var WORKERS = process.env.WEB_CONCURRENCY || 1;
@@ -14,8 +19,25 @@ if (cluster.isMaster) {
     cluster.fork();
   }
 } else {
+  // Use the GoogleStrategy within Passport.
+  // Strategies in passport require a `verify` function, which accept
+  // credentials (in this case, a token, tokenSecret, and Google profile), and
+  // invoke a callback with a user object.
+  // passport.use(new GoogleStrategy({
+  //   consumerKey: GOOGLE_CONSUMER_KEY,
+  //   consumerSecret: GOOGLE_CONSUMER_SECRET,
+  //   callbackURL: "http://www.example.com/auth/google/callback"
+  // },
+  //   function (token, tokenSecret, profile, done) {
+  //     User.findOrCreate({ googleId: profile.id }, function (err, user) {
+  //       return done(err, user);
+  //     });
+  //   }
+  // ));
+
   // Run Ghost in each worker / processor core.
   ghost().then(function (ghostServer) {
+    // ghostServer.start(parentApp);
     ghostServer.start();
   });
 }

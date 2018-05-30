@@ -13,10 +13,12 @@
     "casper": "github:tryghost/Casper#2.1.0",
     "ghost": "^1.8.0",
     "ghost-storage-adapter-s3": "^2.3.0",
-    "mysql": "^2.14.1"
+    "mysql": "^2.14.1",
+    "passport": "0.4.0",
+    "passport-google-oauth": "1.0.0"
   },
   "engines": {
-    "node": "6.11.x"
+    "node": "^6.9.0 || ^8.9.0"
   },
   "scripts": {
     "start": "node server.js"

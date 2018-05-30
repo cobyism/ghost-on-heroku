@@ -3,6 +3,14 @@
   "description": "Just a blogging platform",
   "logo": "https://cdn.rawgit.com/TryGhost/Ghost-Admin/61fe83dff375a145d5272a5382aa2c72bd994830/public/assets/img/large.png",
   "repository": "https://github.com/cobyism/ghost-on-heroku",
+  "buildpacks": [
+    {
+      "url": "https://github.com/WeConnect/nginx-buildpack.git"
+    },
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
   "scripts": {
     "postdeploy": "bin/init-deployment"
   },
@@ -14,7 +22,15 @@
   "env": {
     "PUBLIC_URL": {
       "description": "The HTTPS URL of this app: either your custom domain or default 'herokuapp.com' hostname.",
-      "value": "https://YOURAPPNAME.herokuapp.com"
+      "value": "https://labs-ghost-we.herokuapp.com"
+    },
+    "GOOGLE_CONSUMER_KEY": {
+      "description": "Used for google auth",
+      "required": true
+    },
+    "GOOGLE_CONSUMER_SECRET": {
+      "description": "Used for google auth",
+      "required": true
     },
     "S3_ACCESS_KEY_ID": {
       "description": "Set your AWS Access Key ID to enable S3 file storage. Leave blank to disable file uploads.",
