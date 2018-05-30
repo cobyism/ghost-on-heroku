@@ -1,3 +1,4 @@
+var fs = require('fs');
 var ghost = require('ghost');
 var cluster = require('cluster');
 // var express = require('express');
@@ -5,6 +6,16 @@ var cluster = require('cluster');
 
 // var passport = require('passport');
 // var GoogleStrategy = require('passport-google-oauth').OAuthStrategy;
+
+// write nginx tmp
+fs.writeFile("/tmp/app-initialized", "Ready to launch nginx", function (err) {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("The file was saved!");
+  }
+});
+
 
 // Heroku sets `WEB_CONCURRENCY` to the number of available processor cores.
 var WORKERS = process.env.WEB_CONCURRENCY || 1;
