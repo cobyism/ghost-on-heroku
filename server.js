@@ -22,9 +22,9 @@ if (cluster.isMaster) {
   ghost().then(function (ghostServer) {
     //
     parentApp
-      .get('/test', function (req, res) {
-        res.send('GET request to the test page')
-      })
+      // .get('/test', function (req, res) {
+      //   res.send('GET request to the test page')
+      // })
       .use(utils.getSubdir(), ghostServer.rootApp)
       // .listen('/tmp/nginx.socket', function () {
       //   if (process.env.DYNO) {
