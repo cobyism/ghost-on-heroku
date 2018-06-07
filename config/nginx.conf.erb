@@ -52,5 +52,12 @@ http {
       proxy_redirect    off;
       proxy_pass        http://app_server;
     }
+
+    location /blog {
+      proxy_set_header  Host www.wework.com;
+      proxy_set_header  X-Real-IP $remote_addr;
+      proxy_redirect    off;
+      proxy_pass        https://www.wework.com;
+    }
   }
 }
