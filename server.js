@@ -24,16 +24,15 @@ if (cluster.isMaster) {
     // parentApp
     //   .use(utils.getSubdir(), ghostServer.rootApp)
 
-    //
-    ghostServer.start().then(function () {
-      // write nginx tmp
-      fs.writeFile("/tmp/app-initialized", "Ready to launch nginx", function (err) {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log("The file was saved!");
-        }
-      });
+    // write nginx tmp
+    fs.writeFile("/tmp/app-initialized", "Ready to launch nginx", function (err) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("The file was saved! Starting Ghost server ...");
+        // start Ghost server
+        ghostServer.start();
+      }
     });
   });
 }
