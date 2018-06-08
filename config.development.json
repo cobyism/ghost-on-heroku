@@ -1,7 +1,6 @@
 {
   "url": "http://localhost:2368/",
   "server": {
-    // "socket": "/tmp/nginx.socket",
     "port": 2368,
     "host": "127.0.0.1"
   },

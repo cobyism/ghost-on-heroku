@@ -43,19 +43,19 @@ http {
 
     root /app; # path to your app
 
-    location /nginx_status {
-      # Turn on nginx stats
-      stub_status on;
+    # location /nginx_status {
+    #   # Turn on nginx stats
+    #   stub_status on;
 
-      # I do not need logs for stats
-      access_log   off;
+    #   # I do not need logs for stats
+    #   access_log   off;
 
-      # Security: Only allow access from 192.168.1.100 IP #
-      # allow 192.168.1.100;
+    #   # Security: Only allow access from 192.168.1.100 IP #
+    #   # allow 192.168.1.100;
 
-      # Send rest of the world to /dev/null #
-      # deny all;
-    }
+    #   # Send rest of the world to /dev/null #
+    #   # deny all;
+    # }
 
     location / {
       proxy_set_header  X-Real-IP $remote_addr;
@@ -74,12 +74,38 @@ http {
       proxy_pass        https://www.wework.com;
     }
 
+    # https://developers.shopware.com/blog/2015/03/02/sso-with-nginx-authrequest-module/
+    # Let's handle the redirect in case the the SSO API
+    # returns http code 401. With the error_page directive
+    error_page 401 = @error401;
+    location @error401 {
+      return 302 https://id.wework.com;
+    }
+
+    # Now we have to somehow transport the client's authorization
+    # token from one system to another. After being authorized at
+    # members.wework.com, the user gets a cookie containing the auth
+    # token.
     location = /auth {
       internal;
-      proxy_pass              https://id.wework.com;
+      proxy_pass              https://auth.wework.com;
       proxy_pass_request_body off;
       proxy_set_header        Content-Length "";
       proxy_set_header        X-Original-URI $request_uri;
+      proxy_set_header        Host $http_host;
+      proxy_set_header        X-Real-IP $remote_addr;
+      proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header        X-Forwarded-Proto $scheme;
+
+      # The cookie is set to `.wework.com` so our site an also access the token.
+      # All we have to do now it to pass the token from the cookie to the auth backend.
+
+      # We match the token from the users cookie, followed by a proxy_set_header to
+      # pass the token to the backend.
+      if ($http_cookie ~* "weauth_token=([^;]+)(?:;|$)") {
+        set $token "$1";
+      }
+      proxy_set_header X-WEAUTH-SSO-Token $token;
     }
   }
 }
