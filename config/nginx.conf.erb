@@ -66,7 +66,7 @@ http {
     }
 
     location /blog {
-      auth_request      /auth
+      auth_request      /auth;
       auth_request_set  $auth_status $upstream_status;
       proxy_set_header  Host www.wework.com;
       proxy_set_header  X-Real-IP $remote_addr;
