@@ -6,52 +6,52 @@ var ghost = require("ghost");
 
 var utils = require("./node_modules/ghost/core/server/services/url/utils");
 var express = require("express");
-var session = require("express-session");
+// var session = require("express-session");
 var parentApp = express();
 // var router = express.Router();
 
-var passport = require("passport");
-var OAuth2Strategy = require("passport-oauth").OAuth2Strategy;
+// var passport = require("passport");
+// var OAuth2Strategy = require("passport-oauth").OAuth2Strategy;
 
-passport.use(
-  "id",
-  new OAuth2Strategy(
-    {
-      authorizationURL: "https://id-staging.wework.com/oauth/authorize",
-      tokenURL: "https://id-staging.wework.com/oauth/token",
-      clientID: process.env.ID_APPID,
-      clientSecret: process.env.ID_APPSECRET,
-      callbackURL: process.env.ID_CALLBACKURL
-    },
-    function(accessToken, refreshToken, profile, done) {
-      console.log("*************", {
-        accessToken,
-        refreshToken,
-        profile
-      });
+// passport.use(
+//   "id",
+//   new OAuth2Strategy(
+//     {
+//       authorizationURL: "https://id-staging.wework.com/oauth/authorize",
+//       tokenURL: "https://id-staging.wework.com/oauth/token",
+//       clientID: process.env.ID_APPID,
+//       clientSecret: process.env.ID_APPSECRET,
+//       callbackURL: process.env.ID_CALLBACKURL
+//     },
+//     function(accessToken, refreshToken, profile, done) {
+//       console.log("*************", {
+//         accessToken,
+//         refreshToken,
+//         profile
+//       });
 
-      done(null, {});
-    }
-  )
-);
+//       done(null, {});
+//     }
+//   )
+// );
 
-parentApp.use(session({ secret: "ilovescotchscotchyscotchscotch" }));
-parentApp.use(passport.initialize());
-parentApp.use(passport.session());
+// parentApp.use(session({ secret: "ilovescotchscotchyscotchscotch" }));
+// parentApp.use(passport.initialize());
+// parentApp.use(passport.session());
 
-parentApp.get("/auth/id", passport.authenticate("id"));
-parentApp.get(
-  "/auth/id/callback",
-  passport.authenticate("id", {
-    successRedirect: "/",
-    failureRedirect: "/fail",
-    session: false
-  })
-);
+// parentApp.get("/auth/id", passport.authenticate("id"));
+// parentApp.get(
+//   "/auth/id/callback",
+//   passport.authenticate("id", {
+//     successRedirect: "/",
+//     failureRedirect: "/fail",
+//     session: false
+//   })
+// );
 
-parentApp.get("/fail", function(req, res, next) {
-  res.send("FAIL!");
-});
+// parentApp.get("/fail", function(req, res, next) {
+//   res.send("FAIL!");
+// });
 
 // Heroku sets `WEB_CONCURRENCY` to the number of available processor cores.
 var WORKERS = process.env.WEB_CONCURRENCY || 1;

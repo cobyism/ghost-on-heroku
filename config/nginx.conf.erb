@@ -65,48 +65,48 @@ http {
       proxy_pass        http://app_server;
     }
 
-    location /blog {
-      auth_request      /authorize;
-      auth_request_set  $auth_status $upstream_status;
-      auth_request_set  $auth_cookie $upstream_http_set_cookie;
+    # location /blog {
+    #   auth_request      /authorize;
+    #   auth_request_set  $auth_status $upstream_status;
+    #   auth_request_set  $auth_cookie $upstream_http_set_cookie;
 
-      proxy_set_header  Host www.wework.com;
-      proxy_set_header  X-Real-IP $remote_addr;
-      proxy_redirect    off;
-      proxy_pass        https://www.wework.com;
-    }
+    #   proxy_set_header  Host www.wework.com;
+    #   proxy_set_header  X-Real-IP $remote_addr;
+    #   proxy_redirect    off;
+    #   proxy_pass        https://www.wework.com;
+    # }
 
     # https://developers.shopware.com/blog/2015/03/02/sso-with-nginx-authrequest-module/
     # Let's handle the redirect in case the the SSO API
     # returns http code 401. With the error_page directive
-    error_page 401 = @error401;
-    location @error401 {
-      return 302 /auth/id;
-    }
+    # error_page 401 = @error401;
+    # location @error401 {
+    #   return 302 /auth/id;
+    # }
 
     # Now we have to somehow transport the client's authorization
     # token from one system to another. After being authorized at
     # id.wework.com, the user gets a cookie containing the auth token.
-    location = /authorize {
-      internal;
-      proxy_pass              https://id-staging.wework.com/oauth;
-      proxy_pass_request_body off;
-      proxy_set_header        Content-Length "";
-      proxy_set_header        X-Original-URI $request_uri;
-      proxy_set_header        Host $http_host;
-      proxy_set_header        X-Real-IP $remote_addr;
-      proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
-      proxy_set_header        X-Forwarded-Proto $scheme;
+    # location = /authorize {
+    #   internal;
+    #   proxy_pass              https://id-staging.wework.com/oauth;
+    #   proxy_pass_request_body off;
+    #   proxy_set_header        Content-Length "";
+    #   proxy_set_header        X-Original-URI $request_uri;
+    #   proxy_set_header        Host $http_host;
+    #   proxy_set_header        X-Real-IP $remote_addr;
+    #   proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+    #   proxy_set_header        X-Forwarded-Proto $scheme;
 
-      # The cookie is set to `.wework.com` so our site an also access the token.
-      # All we have to do now it to pass the token from the cookie to the auth backend.
+    #   # The cookie is set to `.wework.com` so our site an also access the token.
+    #   # All we have to do now it to pass the token from the cookie to the auth backend.
 
-      # We match the token from the users cookie, followed by a proxy_set_header to
-      # pass the token to the backend.
-      if ($http_cookie ~* "auth_token=([^;]+)(?:;|$)") {
-        set $token "$1";
-      }
-      proxy_set_header Authorization "Token token=$token";
-    }
+    #   # We match the token from the users cookie, followed by a proxy_set_header to
+    #   # pass the token to the backend.
+    #   if ($http_cookie ~* "auth_token=([^;]+)(?:;|$)") {
+    #     set $token "$1";
+    #   }
+    #   proxy_set_header Authorization "Token token=$token";
+    # }
   }
 }
