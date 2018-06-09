@@ -79,7 +79,7 @@ http {
     # returns http code 401. With the error_page directive
     error_page 401 = @error401;
     location @error401 {
-      return 302 https://id.wework.com;
+      return 302 https://id.wework.com?redirectUrl=$request_uri;
     }
 
     # Now we have to somehow transport the client's authorization
@@ -88,8 +88,8 @@ http {
     # token.
     location = /auth {
       internal;
-      proxy_pass              https://auth.wework.com;
-      proxy_pass_request_body off;
+      # proxy_pass              https://auth.wework.com;
+      # proxy_pass_request_body off;
       proxy_set_header        Content-Length "";
       proxy_set_header        X-Original-URI $request_uri;
       proxy_set_header        Host $http_host;
