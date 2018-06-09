@@ -106,7 +106,7 @@ http {
       if ($http_cookie ~* "auth_token=([^;]+)(?:;|$)") {
         set $token "$1";
       }
-      proxy_set_header Authorization Token token=$token;
+      proxy_set_header Authorization "Token token=$token";
     }
   }
 }
