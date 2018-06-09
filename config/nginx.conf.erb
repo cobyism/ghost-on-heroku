@@ -86,10 +86,10 @@ http {
     # token from one system to another. After being authorized at
     # members.wework.com, the user gets a cookie containing the auth
     # token.
-    location /auth {
+    location = /auth {
       internal;
-      # proxy_pass              https://auth.wework.com;
-      # proxy_pass_request_body off;
+      proxy_pass              /auth/id;
+      proxy_pass_request_body off;
       proxy_set_header        Content-Length "";
       proxy_set_header        X-Original-URI $request_uri;
       proxy_set_header        Host $http_host;
