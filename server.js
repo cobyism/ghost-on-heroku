@@ -6,6 +6,7 @@ var ghost = require("ghost");
 
 var utils = require("./node_modules/ghost/core/server/services/url/utils");
 var express = require("express");
+var session = require("express-session");
 var parentApp = express();
 // var router = express.Router();
 
@@ -34,7 +35,10 @@ passport.use(
   )
 );
 
+parentApp.use(session({ secret: "ilovescotchscotchyscotchscotch" }));
 parentApp.use(passport.initialize());
+parentApp.use(passport.session());
+
 parentApp.get("/auth/id", passport.authenticate("id"));
 parentApp.get(
   "/auth/id/callback",

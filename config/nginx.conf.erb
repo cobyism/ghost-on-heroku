@@ -36,7 +36,7 @@ http {
   }
 
   server {
-    listen <%= ENV["PORT"] %>;
+    listen <%= ENV["PORT"] || 3000 %>;
     server_name _;
     keepalive_timeout 5;
     client_max_body_size <%= ENV['NGINX_CLIENT_MAX_BODY_SIZE'] || 1 %>M;
@@ -66,8 +66,10 @@ http {
     }
 
     location /blog {
-      auth_request      /auth;
+      auth_request      /authorize;
       auth_request_set  $auth_status $upstream_status;
+      auth_request_set  $auth_cookie $upstream_http_set_cookie;
+
       proxy_set_header  Host www.wework.com;
       proxy_set_header  X-Real-IP $remote_addr;
       proxy_redirect    off;
@@ -79,16 +81,15 @@ http {
     # returns http code 401. With the error_page directive
     error_page 401 = @error401;
     location @error401 {
-      return 302 https://id.wework.com?redirectUrl=$request_uri;
+      return 302 /auth/id
     }
 
     # Now we have to somehow transport the client's authorization
     # token from one system to another. After being authorized at
-    # members.wework.com, the user gets a cookie containing the auth
-    # token.
-    location = /auth {
+    # id.wework.com, the user gets a cookie containing the auth token.
+    location = /authorize {
       internal;
-      proxy_pass              /auth/id;
+      proxy_pass              https://id-staging.wework.com/oauth;
       proxy_pass_request_body off;
       proxy_set_header        Content-Length "";
       proxy_set_header        X-Original-URI $request_uri;
@@ -102,10 +103,10 @@ http {
 
       # We match the token from the users cookie, followed by a proxy_set_header to
       # pass the token to the backend.
-      if ($http_cookie ~* "weauth_token=([^;]+)(?:;|$)") {
+      if ($http_cookie ~* "auth_token=([^;]+)(?:;|$)") {
         set $token "$1";
       }
-      proxy_set_header X-WEAUTH-SSO-Token $token;
+      proxy_set_header Authorization Token token=$token;
     }
   }
 }
