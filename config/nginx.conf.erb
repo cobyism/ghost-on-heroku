@@ -81,7 +81,7 @@ http {
     # returns http code 401. With the error_page directive
     error_page 401 = @error401;
     location @error401 {
-      return 302 /auth/id
+      return 302 /auth/id;
     }
 
     # Now we have to somehow transport the client's authorization
