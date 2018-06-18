@@ -95,7 +95,7 @@ http {
     # id.wework.com, the user gets a cookie containing the auth token.
     location = /auth {
       internal;
-      proxy_pass              https://id-staging.wework.com/oauth/token/info;
+      proxy_pass              https://id-staging.wework.com/oauth/token/info/;
       proxy_pass_request_body off;
       proxy_set_header        Content-Length "";
       proxy_set_header        X-Original-URI $request_uri;
