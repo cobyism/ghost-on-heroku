@@ -13,23 +13,23 @@ const router = express.Router()
 
 const passport = require('passport')
 const OAuth2Strategy = require('passport-oauth').OAuth2Strategy
-const Auth0Strategy = require('passport-auth0')
+// const Auth0Strategy = require('passport-auth0')
 
 // Configure Passport to use Auth0
-passport.use(
-  'auth0',
-  new Auth0Strategy(
-    {
-      domain: process.env.AUTH0_DOMAIN,
-      clientID: process.env.AUTH0_CLIENT_ID,
-      clientSecret: process.env.AUTH0_CLIENT_SECRET,
-      callbackURL: 'http://localhost:3000/callback' //process.env.AUTH0_DOMAIN
-    },
-    (accessToken, refreshToken, extraParams, profile, done) => {
-      return done(null, profile)
-    }
-  )
-)
+// passport.use(
+//   'auth0',
+//   new Auth0Strategy(
+//     {
+//       domain: process.env.AUTH0_DOMAIN,
+//       clientID: process.env.AUTH0_CLIENT_ID,
+//       clientSecret: process.env.AUTH0_CLIENT_SECRET,
+//       callbackURL: 'http://localhost:3000/callback' //process.env.AUTH0_DOMAIN
+//     },
+//     (accessToken, refreshToken, extraParams, profile, done) => {
+//       return done(null, profile)
+//     }
+//   )
+// )
 
 passport.use(
   'id',
