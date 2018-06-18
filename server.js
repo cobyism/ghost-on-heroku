@@ -1,91 +1,145 @@
-require("dotenv").config({ silent: true });
+require('dotenv').config({ silent: true })
 
-var fs = require("fs");
-var cluster = require("cluster");
-var ghost = require("ghost");
+const fs = require('fs')
+const cluster = require('cluster')
+const ghost = require('ghost')
 
-var utils = require("./node_modules/ghost/core/server/services/url/utils");
-var express = require("express");
-// var session = require("express-session");
-var parentApp = express();
-// var router = express.Router();
+const utils = require('./node_modules/ghost/core/server/services/url/utils')
+const express = require('express')
+const session = require("express-session")
 
-// var passport = require("passport");
-// var OAuth2Strategy = require("passport-oauth").OAuth2Strategy;
+const parentApp = express()
+const router = express.Router()
 
-// passport.use(
-//   "id",
-//   new OAuth2Strategy(
-//     {
-//       authorizationURL: "https://id-staging.wework.com/oauth/authorize",
-//       tokenURL: "https://id-staging.wework.com/oauth/token",
-//       clientID: process.env.ID_APPID,
-//       clientSecret: process.env.ID_APPSECRET,
-//       callbackURL: process.env.ID_CALLBACKURL
-//     },
-//     function(accessToken, refreshToken, profile, done) {
-//       console.log("*************", {
-//         accessToken,
-//         refreshToken,
-//         profile
-//       });
+const passport = require('passport')
+const OAuth2Strategy = require('passport-oauth').OAuth2Strategy
+const Auth0Strategy = require('passport-auth0')
 
-//       done(null, {});
-//     }
-//   )
-// );
+// Configure Passport to use Auth0
+passport.use(
+  'auth0',
+  new Auth0Strategy(
+    {
+      domain: process.env.AUTH0_DOMAIN,
+      clientID: process.env.AUTH0_CLIENT_ID,
+      clientSecret: process.env.AUTH0_CLIENT_SECRET,
+      callbackURL: 'http://localhost:3000/callback' //process.env.AUTH0_DOMAIN
+    },
+    (accessToken, refreshToken, extraParams, profile, done) => {
+      return done(null, profile)
+    }
+  )
+)
 
-// parentApp.use(session({ secret: "ilovescotchscotchyscotchscotch" }));
-// parentApp.use(passport.initialize());
-// parentApp.use(passport.session());
+passport.use(
+  'id',
+  new OAuth2Strategy(
+    {
+      authorizationURL: 'https://id-staging.wework.com/oauth/authorize',
+      tokenURL: 'https://id-staging.wework.com/oauth/token',
+      clientID: process.env.ID_APPID,
+      clientSecret: process.env.ID_APPSECRET,
+      callbackURL: process.env.ID_CALLBACKURL
+    },
+    (accessToken, refreshToken, profile, done) => {
+      return done(null, accessToken)
+    }
+  )
+)
 
-// parentApp.get("/auth/id", passport.authenticate("id"));
-// parentApp.get(
-//   "/auth/id/callback",
-//   passport.authenticate("id", {
-//     successRedirect: "/",
-//     failureRedirect: "/fail",
-//     session: false
-//   })
-// );
+// This can be used to keep a smaller payload
+passport.serializeUser((user, done) => {
+  done(null, user)
+})
 
-// parentApp.get("/fail", function(req, res, next) {
-//   res.send("FAIL!");
-// });
+passport.deserializeUser((user, done) => {
+  done(null, user)
+})
+
+// Perform the login
+// router.get(
+//   '/login',
+//   passport.authenticate('auth0', {
+//     clientID: process.env.AUTH0_CLIENT_ID,
+//     domain: process.env.AUTH0_DOMAIN,
+//     redirectUri: process.env.AUTH0_CALLBACK_URL,
+//     audience: 'https://' + process.env.AUTH0_DOMAIN + '/userinfo',
+//     responseType: 'code',
+//     scope: 'openid'
+//   }),
+//   (req, res) => {
+//     res.redirect(utils.getSubdir())
+//   }
+// )
+
+// // Perform session logout and redirect to homepage
+// router.get('/logout', (req, res) => {
+//   req.logout()
+//   res.redirect('/')
+// })
+
+// Perform the final stage of authentication and redirect to '/user'
+// router.get(
+//   '/callback',
+//   passport.authenticate('auth0', {
+//     failureRedirect: '/'
+//   }),
+//   (req, res) => {
+//     res.redirect(req.session.returnTo || '/user')
+//   }
+// )
+
+router.get('/auth/id', passport.authenticate('id'))
+router.get('/auth/id/callback',
+  passport.authenticate('id', {
+    // successRedirect: "/blog",
+    // failureRedirect: "/fail",
+    session: false
+  }),
+  (req, res, next) => {
+    res.cookie('ID_auth_token', req.user, { maxAge: 2592000000, httpOnly: true })
+    res.send(JSON.stringify(req.user))
+    // res.redirect('/blog')
+    return next()
+  }
+)
+
+// parentApp.use(session({ secret: 'supersecretghostblogsessionwordcats' }))
+parentApp.use(passport.initialize())
+// parentApp.use(passport.session())
+parentApp.use(router)
 
 // Heroku sets `WEB_CONCURRENCY` to the number of available processor cores.
-var WORKERS = process.env.WEB_CONCURRENCY || 1;
+var WORKERS = process.env.WEB_CONCURRENCY || 1
 
 if (cluster.isMaster) {
   // Master starts all workers and restarts them when they exit.
-  cluster.on("exit", (worker, code, signal) => {
+  cluster.on('exit', (worker, code, signal) => {
     console.log(
       `Starting a new worker because PID: ${
         worker.process.pid
       } exited code ${code} from ${signal} signal.`
-    );
-    cluster.fork();
-  });
+    )
+    cluster.fork()
+  })
 
   for (var i = 0; i < WORKERS; i++) {
-    cluster.fork();
+    cluster.fork()
   }
 } else {
   // Run Ghost in each worker / processor core.
-  ghost().then(function(ghostServer) {
-    parentApp.use(utils.getSubdir(), ghostServer.rootApp);
+  ghost().then((ghostServer) => {
+    parentApp.use(utils.getSubdir(), ghostServer.rootApp)
 
-    ghostServer.start(parentApp).then(function() {
+    ghostServer.start(parentApp).then(() => {
       // write nginx tmp
-      fs.writeFile("/tmp/app-initialized", "Ready to launch nginx", function(
-        err
-      ) {
+      fs.writeFile('/tmp/app-initialized', 'Ready to launch nginx', ( err) => {
         if (err) {
-          console.log(err);
+          console.log(err)
         } else {
-          console.log("The file was saved! Starting Ghost server ...");
+          console.log('The file was saved! Starting Ghost server ...')
         }
-      });
-    });
-  });
+      })
+    })
+  })
 }

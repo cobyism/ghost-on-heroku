@@ -359,6 +359,10 @@ bcryptjs@2.4.3:
   version "2.4.3"
   resolved "https://registry.yarnpkg.com/bcryptjs/-/bcryptjs-2.4.3.tgz#9ab5627b93e60621ff7cdac5da9733027df1d0cb"
 
+bellajs@^7.2.2:
+  version "7.2.2"
+  resolved "https://registry.yarnpkg.com/bellajs/-/bellajs-7.2.2.tgz#dc6f8c13acb248dc2ef1b46d01286a16ca31025a"
+
 bignumber.js@4.0.4:
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-4.0.4.tgz#7c40f5abcd2d6623ab7b99682ee7db81b11889a4"
@@ -2101,9 +2105,9 @@ ghost-storage-base@0.0.3:
   dependencies:
     moment "^2.19.3"
 
-ghost@1.24.1:
-  version "1.24.1"
-  resolved "https://registry.yarnpkg.com/ghost/-/ghost-1.24.1.tgz#adf4bf35e4fd1e355419b0e736ca153ab137d4b4"
+ghost@1.24.4:
+  version "1.24.4"
+  resolved "https://registry.yarnpkg.com/ghost/-/ghost-1.24.4.tgz#07c534adc446be7f3220a6df607a389654fa4c12"
   dependencies:
     amperize "0.3.7"
     analytics-node "2.4.1"
@@ -2156,6 +2160,7 @@ ghost@1.24.1:
     netjet "1.3.0"
     nodemailer "0.7.1"
     oauth2orize "1.11.0"
+    oembed-parser "1.1.0"
     passport "0.4.0"
     passport-http-bearer "1.0.1"
     passport-oauth2-client-password "0.1.2"
@@ -3644,6 +3649,10 @@ nice-try@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.4.tgz#d93962f6c52f2c1558c0fbda6d512819f1efe1c4"
 
+node-fetch@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.1.2.tgz#ab884e8e7e57e38a944753cec706f788d1768bb5"
+
 node-loggly-bulk@^2.2.2:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/node-loggly-bulk/-/node-loggly-bulk-2.2.2.tgz#4180fdf0ec0a490c5a2edd68cf728fd4a5f60df8"
@@ -3825,6 +3834,14 @@ object.pick@^1.2.0, object.pick@^1.3.0:
   resolved "https://registry.yarnpkg.com/object.pick/-/object.pick-1.3.0.tgz#87a10ac4c1694bd2e1cbf53591a66141fb5dd747"
   dependencies:
     isobject "^3.0.1"
+
+oembed-parser@1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/oembed-parser/-/oembed-parser-1.1.0.tgz#1e61c2e89c200d9bbc46fceee1b44698b5011450"
+  dependencies:
+    bellajs "^7.2.2"
+    node-fetch "^2.1.2"
+    promise-wtf "^1.2.4"
 
 on-finished@^2.3.0, on-finished@~2.3.0:
   version "2.3.0"
@@ -4009,6 +4026,14 @@ pascalcase@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/pascalcase/-/pascalcase-0.1.1.tgz#b363e55e8006ca6fe21784d2db22bd15d7917f14"
 
+passport-auth0@0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/passport-auth0/-/passport-auth0-0.6.1.tgz#8a6ace06b5d1927aaad15e22e1c43b9b04e5ddee"
+  dependencies:
+    passport-oauth "^1.0.0"
+    request "^2.61.0"
+    xtend "^4.0.0"
+
 passport-http-bearer@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/passport-http-bearer/-/passport-http-bearer-1.0.1.tgz#147469ea3669e2a84c6167ef99dbb77e1f0098a8"
@@ -4038,7 +4063,7 @@ passport-oauth2@1.x.x:
     uid2 "0.0.x"
     utils-merge "1.x.x"
 
-passport-oauth@1.0.0:
+passport-oauth@1.0.0, passport-oauth@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/passport-oauth/-/passport-oauth-1.0.0.tgz#90aff63387540f02089af28cdad39ea7f80d77df"
   dependencies:
@@ -4231,6 +4256,10 @@ process-nextick-args@~2.0.0:
 progress@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/progress/-/progress-2.0.0.tgz#8a1be366bf8fc23db2bd23f10c6fe920b4389d1f"
+
+promise-wtf@^1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/promise-wtf/-/promise-wtf-1.2.4.tgz#8cbdd31ea10dee074fbb6387cbc96e413993376c"
 
 proto-list@~1.2.1:
   version "1.2.4"
@@ -4456,7 +4485,7 @@ replace-in-file@3.4.0:
     glob "^7.1.2"
     yargs "^11.0.0"
 
-"request@>=2.76.0 <3.0.0":
+"request@>=2.76.0 <3.0.0", request@^2.61.0:
   version "2.87.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.87.0.tgz#32f00235cd08d482b4d0d68db93a829c0ed5756e"
   dependencies:

@@ -13,10 +13,11 @@
     "casper": "github:tryghost/Casper#2.1.0",
     "dotenv": "6.0.0",
     "express-session": "1.15.6",
-    "ghost": "1.24.1",
+    "ghost": "1.24.4",
     "ghost-storage-adapter-s3": "^2.3.0",
     "mysql": "^2.14.1",
     "passport": "0.4.0",
+    "passport-auth0": "0.6.1",
     "passport-oauth": "1.0.0"
   },
   "engines": {
