@@ -66,7 +66,7 @@ http {
     }
 
     location /blog {
-      auth_request      /oauth/token/info;
+      auth_request      /auth;
       auth_request_set  $auth_status $upstream_status;
       auth_request_set  $auth_cookie $upstream_http_set_cookie;
 
@@ -87,9 +87,9 @@ http {
     # Now we have to somehow transport the client's authorization
     # token from one system to another. After being authorized at
     # id.wework.com, the user gets a cookie containing the auth token.
-    location = /oauth/token/info {
+    location = /auth {
       internal;
-      proxy_pass              https://id-staging.wework.com;
+      proxy_pass              https://id-staging.wework.com/oauth/token/info;
       proxy_pass_request_body off;
       proxy_set_header        Content-Length "";
       proxy_set_header        X-Original-URI $request_uri;
