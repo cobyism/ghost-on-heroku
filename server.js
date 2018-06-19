@@ -52,7 +52,7 @@ router.get(
   }
 )
 
-parentApp.use(favicon())
+// parentApp.use(favicon())
 parentApp.use(cookieParser())
 
 parentApp.use(session({
