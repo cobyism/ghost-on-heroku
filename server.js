@@ -6,9 +6,9 @@ const ghost = require('ghost')
 
 const utils = require('./node_modules/ghost/core/server/services/url/utils')
 const express = require('express')
-const session = require('express-session')
-const cookieParser = require('cookie-parser')
-const MemoryStore = require('memorystore')(session)
+// const session = require('express-session')
+// const cookieParser = require('cookie-parser')
+// const MemoryStore = require('memorystore')(session)
 // const MemcachedStore = require('connect-memjs')(session)
 const passport = require('passport')
 const OAuth2Strategy = require('passport-oauth').OAuth2Strategy
@@ -49,36 +49,37 @@ router.get('/', (req, res, next) => {
 router.get('/auth/id', passport.authenticate('id'))
 router.get(
   '/auth/id/callback',
-  passport.authenticate('id', { failureRedirect: '/login' }),
+  passport.authenticate('id'),
   (req, res) => {
     // res.redirect(utils.getSubdir() + (req.session.returnTo || '/'))
     res.redirect(utils.getSubdir())
   }
 )
 
-parentApp.use(express.static('public'))
-parentApp.use(cookieParser())
+// parentApp.use(express.static('public'))
+// parentApp.use(cookieParser())
 
-parentApp.use(
-  session({
-    secret: 'supersecretghostblogsessionwordcats',
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      maxAge: 86400000,
-      secure: parentApp.get('env') === 'production'
-    },
-    store: new MemoryStore({
-      checkPeriod: 86400000 // prune expired entries every 24h
-    })
-    // store: new MemcachedStore({
-    //   servers: [process.env.MEMCACHIER_SERVERS],
-    //   prefix: '_session_'
-    // }),
-  })
-)
+// parentApp.use(
+//   session({
+//     secret: 'supersecretghostblogsessionwordcats',
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: {
+//       maxAge: 86400000,
+//       secure: parentApp.get('env') === 'production'
+//     },
+//     store: new MemoryStore({
+//       checkPeriod: 86400000 // prune expired entries every 24h
+//     })
+//     // store: new MemcachedStore({
+//     //   servers: [process.env.MEMCACHIER_SERVERS],
+//     //   prefix: '_session_'
+//     // }),
+//   })
+// )
+
 parentApp.use(passport.initialize())
-parentApp.use(passport.session())
+// parentApp.use(passport.session())
 parentApp.use(router)
 
 // Heroku sets `WEB_CONCURRENCY` to the number of available processor cores.
