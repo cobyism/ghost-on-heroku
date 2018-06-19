@@ -7,6 +7,7 @@ const ghost = require('ghost')
 const utils = require('./node_modules/ghost/core/server/services/url/utils')
 const express = require('express')
 const session = require('express-session')
+const MemcachedStore = require('connect-memjs')(session)
 const passport = require('passport')
 const OAuth2Strategy = require('passport-oauth').OAuth2Strategy
 
@@ -49,7 +50,16 @@ router.get(
   }
 )
 
-parentApp.use(session({ secret: 'supersecretghostblogsessionwordcats' }))
+parentApp.use(session({
+  secret: 'supersecretghostblogsessionwordcats',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: true },
+  store: new MemcachedStore({
+    servers: [process.env.MEMCACHIER_SERVERS],
+    prefix: '_session_'
+  }),
+}))
 parentApp.use(passport.initialize())
 parentApp.use(passport.session())
 parentApp.use(router)
