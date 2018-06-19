@@ -46,7 +46,8 @@ router.get(
   '/auth/id/callback',
   passport.authenticate('id'),
   (req, res, next) => {
-    res.redirect(utils.getSubdir() + (req.session.returnTo || '/'))
+    // res.redirect(utils.getSubdir() + (req.session.returnTo || '/'))
+    res.redirect(utils.getSubdir())
     next()
   }
 )
@@ -58,10 +59,10 @@ parentApp.use(session({
   secret: 'supersecretghostblogsessionwordcats',
   resave: false,
   saveUninitialized: false,
-  // cookie: { secure: (parentApp.get('env') === 'production') },
+  cookie: { secure: (parentApp.get('env') === 'production') },
   store: new MemcachedStore({
     servers: [process.env.MEMCACHIER_SERVERS],
-    // prefix: '_session_'
+    prefix: '_session_'
   }),
 }))
 parentApp.use(passport.initialize())
