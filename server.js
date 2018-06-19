@@ -7,6 +7,8 @@ const ghost = require('ghost')
 const utils = require('./node_modules/ghost/core/server/services/url/utils')
 const express = require('express')
 const session = require('express-session')
+const favicon = require('serve-favicon')
+const cookieParser = require('cookie-parser')
 const MemcachedStore = require('connect-memjs')(session)
 const passport = require('passport')
 const OAuth2Strategy = require('passport-oauth').OAuth2Strategy
@@ -50,14 +52,17 @@ router.get(
   }
 )
 
+parentApp.use(favicon())
+parentApp.use(cookieParser())
+
 parentApp.use(session({
   secret: 'supersecretghostblogsessionwordcats',
   resave: false,
-  saveUninitialized: true,
-  cookie: { secure: (parentApp.get('env') === 'production') },
+  saveUninitialized: false,
+  // cookie: { secure: (parentApp.get('env') === 'production') },
   store: new MemcachedStore({
     servers: [process.env.MEMCACHIER_SERVERS],
-    prefix: '_session_'
+    // prefix: '_session_'
   }),
 }))
 parentApp.use(passport.initialize())
