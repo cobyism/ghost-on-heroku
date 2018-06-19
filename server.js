@@ -49,33 +49,34 @@ router.get('/', (req, res, next) => {
 router.get('/auth/id', passport.authenticate('id'))
 router.get(
   '/auth/id/callback',
-  passport.authenticate('id'),
-  (req, res, next) => {
+  passport.authenticate('id', { failureRedirect: '/login' }),
+  (req, res) => {
     // res.redirect(utils.getSubdir() + (req.session.returnTo || '/'))
     res.redirect(utils.getSubdir())
-    next()
   }
 )
 
 parentApp.use(express.static('public'))
 parentApp.use(cookieParser())
 
-parentApp.use(session({
-  secret: 'supersecretghostblogsessionwordcats',
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    maxAge: 86400000,
-    secure: (parentApp.get('env') === 'production')
-  },
-  store: new MemoryStore({
-    checkPeriod: 86400000 // prune expired entries every 24h
-  }),
-  // store: new MemcachedStore({
-  //   servers: [process.env.MEMCACHIER_SERVERS],
-  //   prefix: '_session_'
-  // }),
-}))
+parentApp.use(
+  session({
+    secret: 'supersecretghostblogsessionwordcats',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 86400000,
+      secure: parentApp.get('env') === 'production'
+    },
+    store: new MemoryStore({
+      checkPeriod: 86400000 // prune expired entries every 24h
+    })
+    // store: new MemcachedStore({
+    //   servers: [process.env.MEMCACHIER_SERVERS],
+    //   prefix: '_session_'
+    // }),
+  })
+)
 parentApp.use(passport.initialize())
 parentApp.use(passport.session())
 parentApp.use(router)
