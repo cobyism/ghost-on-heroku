@@ -78,13 +78,13 @@ if (cluster.isMaster) {
 
     ghostServer.start(parentApp).then(() => {
       // write nginx tmp
-      fs.writeFile('/tmp/app-initialized', 'Ready to launch nginx', err => {
-        if (err) {
-          console.log(err)
-        } else {
-          console.log('The file was saved! Starting Ghost server ...')
-        }
-      })
+      // fs.writeFile('/tmp/app-initialized', 'Ready to launch nginx', err => {
+      //   if (err) {
+      //     console.log(err)
+      //   } else {
+      //     console.log('The file was saved! Starting Ghost server ...')
+      //   }
+      // })
     })
   })
 }
