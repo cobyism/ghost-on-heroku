@@ -8,7 +8,8 @@ const utils = require('./node_modules/ghost/core/server/services/url/utils')
 const express = require('express')
 const session = require('express-session')
 const cookieParser = require('cookie-parser')
-const MemcachedStore = require('connect-memjs')(session)
+const MemoryStore = require('memorystore')(session)
+// const MemcachedStore = require('connect-memjs')(session)
 const passport = require('passport')
 const OAuth2Strategy = require('passport-oauth').OAuth2Strategy
 
@@ -59,11 +60,17 @@ parentApp.use(session({
   secret: 'supersecretghostblogsessionwordcats',
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: (parentApp.get('env') === 'production') },
-  store: new MemcachedStore({
-    servers: [process.env.MEMCACHIER_SERVERS],
-    prefix: '_session_'
+  cookie: {
+    maxAge: 86400000,
+    secure: (parentApp.get('env') === 'production')
+  },
+  store: new MemoryStore({
+    checkPeriod: 86400000 // prune expired entries every 24h
   }),
+  // store: new MemcachedStore({
+  //   servers: [process.env.MEMCACHIER_SERVERS],
+  //   prefix: '_session_'
+  // }),
 }))
 parentApp.use(passport.initialize())
 parentApp.use(passport.session())
