@@ -18,11 +18,9 @@
     "express-session": "1.15.6",
     "ghost": "1.24.4",
     "ghost-storage-adapter-s3": "^2.3.0",
-    "memorystore": "1.6.0",
     "mysql": "^2.14.1",
     "passport": "0.4.0",
-    "passport-oauth": "1.0.0",
-    "serve-favicon": "2.5.0"
+    "passport-oauth": "1.0.0"
   },
   "engines": {
     "node": "^6.9.0 || ^8.9.0"
