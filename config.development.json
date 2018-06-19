@@ -1,7 +1,7 @@
 {
-  "url": "http://localhost:3000/blog",
+  "url": "http://localhost:5000/blog",
   "server": {
-    "port": 3000,
+    "port": 5000,
     "host": "127.0.0.1"
   },
   "database": {

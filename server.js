@@ -6,48 +6,31 @@ const ghost = require('ghost')
 
 const utils = require('./node_modules/ghost/core/server/services/url/utils')
 const express = require('express')
-const session = require("express-session")
+const session = require('express-session')
+const passport = require('passport')
+const OAuth2Strategy = require('passport-oauth').OAuth2Strategy
 
 const parentApp = express()
 const router = express.Router()
 
-const passport = require('passport')
-const OAuth2Strategy = require('passport-oauth').OAuth2Strategy
-// const Auth0Strategy = require('passport-auth0')
-
-// Configure Passport to use Auth0
-// passport.use(
-//   'auth0',
-//   new Auth0Strategy(
-//     {
-//       domain: process.env.AUTH0_DOMAIN,
-//       clientID: process.env.AUTH0_CLIENT_ID,
-//       clientSecret: process.env.AUTH0_CLIENT_SECRET,
-//       callbackURL: 'http://localhost:3000/callback' //process.env.AUTH0_DOMAIN
-//     },
-//     (accessToken, refreshToken, extraParams, profile, done) => {
-//       return done(null, profile)
-//     }
-//   )
-// )
+const isAuthenticated = require('./lib/auth.js').isAuthenticated
 
 passport.use(
   'id',
   new OAuth2Strategy(
     {
-      authorizationURL: 'https://id-staging.wework.com/oauth/authorize',
-      tokenURL: 'https://id-staging.wework.com/oauth/token',
+      authorizationURL: process.env.ID_AUTH_URL,
+      tokenURL: process.env.ID_TOKEN_URL,
       clientID: process.env.ID_APPID,
       clientSecret: process.env.ID_APPSECRET,
       callbackURL: process.env.ID_CALLBACKURL
     },
     (accessToken, refreshToken, profile, done) => {
-      return done(null, accessToken)
+      return done(null, profile)
     }
   )
 )
 
-// This can be used to keep a smaller payload
 passport.serializeUser((user, done) => {
   done(null, user)
 })
@@ -56,57 +39,19 @@ passport.deserializeUser((user, done) => {
   done(null, user)
 })
 
-// Perform the login
-// router.get(
-//   '/login',
-//   passport.authenticate('auth0', {
-//     clientID: process.env.AUTH0_CLIENT_ID,
-//     domain: process.env.AUTH0_DOMAIN,
-//     redirectUri: process.env.AUTH0_CALLBACK_URL,
-//     audience: 'https://' + process.env.AUTH0_DOMAIN + '/userinfo',
-//     responseType: 'code',
-//     scope: 'openid'
-//   }),
-//   (req, res) => {
-//     res.redirect(utils.getSubdir())
-//   }
-// )
-
-// // Perform session logout and redirect to homepage
-// router.get('/logout', (req, res) => {
-//   req.logout()
-//   res.redirect('/')
-// })
-
-// Perform the final stage of authentication and redirect to '/user'
-// router.get(
-//   '/callback',
-//   passport.authenticate('auth0', {
-//     failureRedirect: '/'
-//   }),
-//   (req, res) => {
-//     res.redirect(req.session.returnTo || '/user')
-//   }
-// )
-
 router.get('/auth/id', passport.authenticate('id'))
-router.get('/auth/id/callback',
-  passport.authenticate('id', {
-    // successRedirect: "/blog",
-    // failureRedirect: "/fail",
-    session: false
-  }),
+router.get(
+  '/auth/id/callback',
+  passport.authenticate('id'),
   (req, res, next) => {
-    res.cookie('ID_auth_token', req.user, { maxAge: 2592000000, httpOnly: true })
-    res.send(JSON.stringify(req.user))
-    // res.redirect('/blog')
-    return next()
+    res.redirect(utils.getSubdir() + req.session.returnTo)
+    next()
   }
 )
 
-// parentApp.use(session({ secret: 'supersecretghostblogsessionwordcats' }))
+parentApp.use(session({ secret: 'supersecretghostblogsessionwordcats' }))
 parentApp.use(passport.initialize())
-// parentApp.use(passport.session())
+parentApp.use(passport.session())
 parentApp.use(router)
 
 // Heroku sets `WEB_CONCURRENCY` to the number of available processor cores.
@@ -128,12 +73,12 @@ if (cluster.isMaster) {
   }
 } else {
   // Run Ghost in each worker / processor core.
-  ghost().then((ghostServer) => {
-    parentApp.use(utils.getSubdir(), ghostServer.rootApp)
+  ghost().then(ghostServer => {
+    parentApp.use(utils.getSubdir(), isAuthenticated, ghostServer.rootApp)
 
     ghostServer.start(parentApp).then(() => {
       // write nginx tmp
-      fs.writeFile('/tmp/app-initialized', 'Ready to launch nginx', ( err) => {
+      fs.writeFile('/tmp/app-initialized', 'Ready to launch nginx', err => {
         if (err) {
           console.log(err)
         } else {
