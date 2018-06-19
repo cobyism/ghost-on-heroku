@@ -52,9 +52,9 @@ router.get(
 
 parentApp.use(session({
   secret: 'supersecretghostblogsessionwordcats',
-  resave: true,
+  resave: false,
   saveUninitialized: true,
-  // cookie: { secure: (process.env.NODE_ENV === 'production') },
+  cookie: { secure: (app.get('env') === 'production') },
   store: new MemcachedStore({
     servers: [process.env.MEMCACHIER_SERVERS],
     prefix: '_session_'
