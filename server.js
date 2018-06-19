@@ -7,7 +7,6 @@ const ghost = require('ghost')
 const utils = require('./node_modules/ghost/core/server/services/url/utils')
 const express = require('express')
 const session = require('express-session')
-const favicon = require('serve-favicon')
 const cookieParser = require('cookie-parser')
 const MemcachedStore = require('connect-memjs')(session)
 const passport = require('passport')
@@ -52,7 +51,7 @@ router.get(
   }
 )
 
-// parentApp.use(favicon())
+parentApp.use(express.static('public'))
 parentApp.use(cookieParser())
 
 parentApp.use(session({
