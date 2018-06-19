@@ -42,6 +42,10 @@ passport.deserializeUser((user, done) => {
   done(null, user)
 })
 
+router.get('/', (req, res, next) => {
+  res.send('HELLO')
+})
+
 router.get('/auth/id', passport.authenticate('id'))
 router.get(
   '/auth/id/callback',
