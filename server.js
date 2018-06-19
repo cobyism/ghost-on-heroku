@@ -44,7 +44,7 @@ router.get(
   '/auth/id/callback',
   passport.authenticate('id'),
   (req, res, next) => {
-    res.redirect(utils.getSubdir() + req.session.returnTo)
+    res.redirect(utils.getSubdir() + (req.session.returnTo || '/'))
     next()
   }
 )
