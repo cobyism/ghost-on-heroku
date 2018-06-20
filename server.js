@@ -28,7 +28,7 @@ passport.use(
       callbackURL: process.env.ID_CALLBACKURL
     },
     (accessToken, refreshToken, profile, done) => {
-      return done(null, { accessToken, refreshToken, ...profile })
+      return done(null, { accessToken, ...profile })
     }
   )
 )
@@ -57,12 +57,12 @@ router.get(
 
 parentApp.use(
   session({
+    name: 'ghost.sid',
     secret: 'supersecretghostblogsessionwordcats',
     resave: false,
     saveUninitialized: false,
     cookie: {
       secure: parentApp.get('env') === 'production',
-      maxAge: 2628000000,
     },
     store: new MemcachedStore({
       servers: [process.env.MEMCACHIER_SERVERS],
