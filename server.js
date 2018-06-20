@@ -52,7 +52,6 @@ router.get(
   passport.authenticate('id'),
   (req, res) => {
     const redirectTo = req.session.returnTo || utils.getSubdir()
-    console.log('*********** redirectTo', redirectTo)
     res.redirect(redirectTo)
   }
 )
@@ -62,9 +61,10 @@ parentApp.use(
     secret: 'supersecretghostblogsessionwordcats',
     resave: false,
     saveUninitialized: false,
-    // cookie: {
-    //   secure: parentApp.get('env') === 'production'
-    // },
+    cookie: {
+      secure: parentApp.get('env') === 'production',
+      maxAge: 2628000000,
+    },
     store: new MemcachedStore({
       servers: [process.env.MEMCACHIER_SERVERS],
       prefix: '_session_'
