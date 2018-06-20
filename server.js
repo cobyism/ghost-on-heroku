@@ -42,8 +42,8 @@ passport.deserializeUser((user, done) => {
 })
 
 router.get('/', (req, res, next) => {
-  // req.session.foo = "bar"
-  // res.send(`HELLO ${util.inspect(req.session)}`)
+  req.session.foo = "bar"
+  res.send(`HELLO ${util.inspect(req.session)}`)
 })
 
 router.get('/auth/id', passport.authenticate('id'))
@@ -51,29 +51,29 @@ router.get(
   '/auth/id/callback',
   passport.authenticate('id'),
   (req, res) => {
-    const redirectTo = utils.getSubdir() //req.session.returnTo || utils.getSubdir()
-    // console.log('*********** redirectTo', redirectTo)
+    const redirectTo = req.session.returnTo || utils.getSubdir()
+    console.log('*********** redirectTo', redirectTo)
     res.redirect(redirectTo)
   }
 )
 
-// parentApp.use(
-//   session({
-//     secret: 'supersecretghostblogsessionwordcats',
-//     resave: false,
-//     saveUninitialized: false,
-//     // cookie: {
-//     //   secure: parentApp.get('env') === 'production'
-//     // },
-//     store: new MemcachedStore({
-//       servers: [process.env.MEMCACHIER_SERVERS],
-//       prefix: '_session_'
-//     }),
-//   })
-// )
+parentApp.use(
+  session({
+    secret: 'supersecretghostblogsessionwordcats',
+    resave: false,
+    saveUninitialized: false,
+    // cookie: {
+    //   secure: parentApp.get('env') === 'production'
+    // },
+    store: new MemcachedStore({
+      servers: [process.env.MEMCACHIER_SERVERS],
+      prefix: '_session_'
+    }),
+  })
+)
 
 parentApp.use(passport.initialize())
-// parentApp.use(passport.session())
+parentApp.use(passport.session())
 parentApp.use(router)
 
 // Heroku sets `WEB_CONCURRENCY` to the number of available processor cores.
