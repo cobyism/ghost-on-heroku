@@ -31,8 +31,8 @@ function createConfig() {
         accessKeyId:     process.env.BUCKETEER_AWS_ACCESS_KEY_ID,
         secretAccessKey: process.env.BUCKETEER_AWS_SECRET_ACCESS_KEY,
         bucket:          process.env.BUCKETEER_BUCKET_NAME,
-        region:          process.env.S3_BUCKET_REGION,
-        assetHost:       process.env.S3_ASSET_HOST_URL
+        region:          process.env.BUCKETEER_AWS_REGION,
+        assetHost:       process.env.BUCKETEER_ASSET_HOST_URL
       }
     }
   } else {
