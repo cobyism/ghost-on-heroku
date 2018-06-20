@@ -51,9 +51,6 @@ router.get(
   passport.authenticate('id'),
   (req, res) => {
     const redirectTo = req.session.returnTo || utils.getSubdir()
-    req.session.user = req.user
-    console.log('******* AUTHENTICATED!!', req.user, redirectTo)
-
     res.redirect(redirectTo)
   }
 )
