@@ -42,8 +42,7 @@ passport.deserializeUser((user, done) => {
 })
 
 router.get('/', (req, res, next) => {
-  req.session.foo = "bar"
-  res.send(`HELLO ${util.inspect(req.session)}`)
+  res.redirect(utils.getSubdir())
 })
 
 router.get('/auth/id', passport.authenticate('id'))
