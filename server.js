@@ -46,14 +46,10 @@ router.get('/', (req, res, next) => {
 })
 
 router.get('/auth/id', passport.authenticate('id'))
-router.get(
-  '/auth/id/callback',
-  passport.authenticate('id'),
-  (req, res) => {
-    const redirectTo = req.session.returnTo || utils.getSubdir()
-    res.redirect(redirectTo)
-  }
-)
+router.get('/auth/id/callback', passport.authenticate('id'), (req, res) => {
+  const redirectTo = req.session.returnTo || utils.getSubdir()
+  res.redirect(redirectTo)
+})
 
 parentApp.use(
   session({
@@ -67,7 +63,7 @@ parentApp.use(
     store: new MemcachedStore({
       servers: [process.env.MEMCACHIER_SERVERS],
       prefix: '_session_'
-    }),
+    })
   })
 )
 

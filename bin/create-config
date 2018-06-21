@@ -20,7 +20,7 @@ function createConfig() {
         secretAccessKey: process.env.S3_ACCESS_SECRET_KEY,
         bucket:          process.env.S3_BUCKET_NAME,
         region:          process.env.S3_BUCKET_REGION,
-        assetHost:       process.env.S3_ASSET_HOST_URL
+        assetHost:       process.env.ASSET_HOST_URL
       }
     }
   } else if (!!process.env.BUCKETEER_AWS_ACCESS_KEY_ID) {
@@ -32,7 +32,7 @@ function createConfig() {
         secretAccessKey: process.env.BUCKETEER_AWS_SECRET_ACCESS_KEY,
         bucket:          process.env.BUCKETEER_BUCKET_NAME,
         region:          process.env.BUCKETEER_AWS_REGION,
-        assetHost:       process.env.BUCKETEER_ASSET_HOST_URL
+        assetHost:       process.env.ASSET_HOST_URL
       }
     }
   } else {

@@ -2150,9 +2150,9 @@ ghost-storage-base@0.0.3:
   dependencies:
     moment "^2.19.3"
 
-ghost@1.24.4:
-  version "1.24.4"
-  resolved "https://registry.yarnpkg.com/ghost/-/ghost-1.24.4.tgz#07c534adc446be7f3220a6df607a389654fa4c12"
+ghost@1.24.5:
+  version "1.24.5"
+  resolved "https://registry.yarnpkg.com/ghost/-/ghost-1.24.5.tgz#da68a2bc9b4ade4d6d578379044a766c02804552"
   dependencies:
     amperize "0.3.7"
     analytics-node "2.4.1"
