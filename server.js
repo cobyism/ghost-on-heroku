@@ -2,6 +2,7 @@ require('dotenv').config({ silent: true })
 
 // const util = require('util')
 // const fs = require('fs')
+const path = require('path')
 const cluster = require('cluster')
 const ghost = require('ghost')
 
@@ -70,6 +71,7 @@ parentApp.use(
 parentApp.use(passport.initialize())
 parentApp.use(passport.session())
 parentApp.use(router)
+parentApp.use(utils.getSubdir(), express.static(path.join(__dirname, 'public')))
 
 // Heroku sets `WEB_CONCURRENCY` to the number of available processor cores.
 var WORKERS = process.env.WEB_CONCURRENCY || 1
