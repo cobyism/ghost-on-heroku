@@ -1,10 +1,10 @@
 node_modules/
 npm-debug.log*
 
+content/images/*
 content/data/*.db
 content/logs/
 config.production.json
-content/data/ghost-local.db
 
 package-lock.json
 .env
