@@ -28,10 +28,8 @@ into the {body} of the default.hbs template --}}
             </header>
 
             {{#if feature_image}}
-            <figure class="post-full-image" style="background-image: url({{imgix_url feature_image}})">
-            </figure>
-            <figure class="post-full-image" style="background-image: url({{feature_image}})">
-            </figure>
+            <figure class="post-full-image imgix" style="background-image: url({{imgix_url feature_image}})"></figure>
+            <figure class="post-full-image no-imgix" style="background-image: url({{feature_image}})"></figure>
             {{/if}}
 
             <section class="post-full-content">
@@ -82,10 +80,10 @@ into the {body} of the default.hbs template --}}
                 {{#if related_posts}}
                 <article class="read-next-card"
                     {{#if ../primary_tag.feature_image}}
-                        style="background-image: url({{../primary_tag.feature_image}})"
+                        style="background-image: url({{imgix_url ../primary_tag.feature_image}})"
                     {{else}}
                         {{#if @blog.cover_image}}
-                            style="background-image: url({{@blog.cover_image}})"{{/if}}
+                            style="background-image: url({{imgix_url @blog.cover_image}})"{{/if}}
                     {{/if}}
                 >
                     <header class="read-next-card-header">

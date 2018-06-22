@@ -27,7 +27,7 @@
                     </div>
 
                     {{#if profile_image}}
-                        <a href="{{url}}" class="static-avatar"><img class="author-profile-image" src="{{profile_image}}" alt="{{name}}" /></a>
+                        <a href="{{url}}" class="static-avatar"><img class="author-profile-image" src="{{imgix_url profile_image}}" alt="{{name}}" /></a>
                     {{else}}
                         <a href="{{url}}" class="static-avatar author-profile-image">{{> "icons/avatar"}}</a>
                     {{/if}}

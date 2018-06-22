@@ -27,10 +27,10 @@
 		{{/if}}
 		</span>
 		{{#if tag.feature_image}}
-		<div class="blog-cover cover" style="background-image: url('{{img_url tag.feature_image}}');"></div>
+		<div class="blog-cover cover" style="background-image: url('{{imgix_url tag.feature_image}}');"></div>
 		{{else}}
 		{{#if @blog.cover_image}}
-		<div class="blog-cover cover" style="background-image: url('{{img_url @blog.cover_image}}');"></div>
+		<div class="blog-cover cover" style="background-image: url('{{imgix_url @blog.cover_image}}');"></div>
 		{{/if}}
 		{{/if}}
 	</div>
