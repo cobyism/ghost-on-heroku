@@ -1,7 +1,7 @@
 require('dotenv').config({ silent: true })
 
-const util = require('util')
-const fs = require('fs')
+// const util = require('util')
+// const fs = require('fs')
 const cluster = require('cluster')
 const ghost = require('ghost')
 
@@ -45,8 +45,8 @@ router.get('/', (req, res, next) => {
   res.redirect(utils.getSubdir())
 })
 
-router.get('/auth/id', passport.authenticate('id'))
-router.get('/auth/id/callback', passport.authenticate('id'), (req, res) => {
+router.get('/labs/auth/id', passport.authenticate('id'))
+router.get('/labs/auth/id/callback', passport.authenticate('id'), (req, res) => {
   const redirectTo = req.session.returnTo || utils.getSubdir()
   res.redirect(redirectTo)
 })
