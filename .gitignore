@@ -8,6 +8,7 @@ content/data/ghost-local.db
 
 package-lock.json
 .env
+yarn-error.log
 
 # nginx stuff
 logs/
