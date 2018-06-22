@@ -19,10 +19,20 @@ module.exports = App.extend({
 
       if (path && /`${process.env.ASSET_HOST_URL}`/.test(path)) {
         const relativePath = path.replace(process.env.ASSET_HOST_URL, '')
-        const params = get(options, 'hash.params', '')
+        const params = get(options, 'hash.params', '{}')
         const parsedParams = parse(params.replace(/'/g, '"'))
         const imgixParams = Object.assign({}, parsedParams, defaultParams)
         const url = client.buildURL(relativePath, imgixParams)
+
+        console.log('***** imgix', {
+          path,
+          hostUrl: process.env.ASSET_HOST_URL,
+          params,
+          parsedParams,
+          defaultParams,
+          imgixParams,
+          url
+        })
 
         return url
       }
