@@ -655,6 +655,10 @@ chardet@^0.4.0:
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/chardet/-/chardet-0.4.2.tgz#b5473b33dc97c424e5d98dc87d55d4d8a29c8bf2"
 
+charenc@~0.0.1:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/charenc/-/charenc-0.0.2.tgz#c0a1d2f3a7092e03774bfa83f14c0fc5790a8667"
+
 cheerio@0.22.0:
   version "0.22.0"
   resolved "https://registry.yarnpkg.com/cheerio/-/cheerio-0.22.0.tgz#a9baa860a3f9b595a6b81b1a86873121ed3a269e"
@@ -1020,6 +1024,10 @@ cross-spawn@^6.0.0:
     semver "^5.5.0"
     shebang-command "^1.2.0"
     which "^1.2.9"
+
+crypt@~0.0.1:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/crypt/-/crypt-0.0.2.tgz#88d7ff7ec0dfb86f713dc87bbb42d044d3e6c41b"
 
 crypto-token@^1.0.1:
   version "1.0.1"
@@ -2348,9 +2356,9 @@ graceful-fs@^4.1.0, graceful-fs@^4.1.10, graceful-fs@^4.1.2, graceful-fs@^4.1.6,
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
 
-gscan@1.4.3, "gscan@github:wework/gscan":
+gscan@1.4.3, "gscan@github:wework/gscan#validate-imgix":
   version "1.4.3"
-  resolved "https://codeload.github.com/wework/gscan/tar.gz/f5e01c4f911b1f2c69847fd061cbf323d460de19"
+  resolved "https://codeload.github.com/wework/gscan/tar.gz/f9901b529b0d2e87282425eee037f813bbb3dc80"
   dependencies:
     "@tryghost/extract-zip" "1.6.6"
     bluebird "^3.4.6"
@@ -2451,6 +2459,10 @@ he@~0.3.6:
 hijackresponse@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/hijackresponse/-/hijackresponse-2.0.1.tgz#45f5e0c9b87d73bad858f66021bec377c736b8b3"
+
+hjson@3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/hjson/-/hjson-3.1.1.tgz#eaab95eebc6c0c749442219a817d9b4ff0070dd2"
 
 homedir-polyfill@^1.0.1:
   version "1.0.1"
@@ -2563,6 +2575,13 @@ image-size@0.6.1:
 image-size@0.6.2:
   version "0.6.2"
   resolved "https://registry.yarnpkg.com/image-size/-/image-size-0.6.2.tgz#8ee316d4298b028b965091b673d5f1537adee5b4"
+
+imgix-core-js@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/imgix-core-js/-/imgix-core-js-1.1.1.tgz#892bc1659738878cacd4b8feb5dc9e9d91e9f837"
+  dependencies:
+    js-base64 "^2.1.9"
+    md5 "^2.2.1"
 
 imurmurhash@^0.1.4:
   version "0.1.4"
@@ -2700,7 +2719,7 @@ is-arrayish@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/is-arrayish/-/is-arrayish-0.2.1.tgz#77c99840527aa8ecb1a8ba697b80645a7a926a9d"
 
-is-buffer@^1.1.5:
+is-buffer@^1.1.5, is-buffer@~1.1.1:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/is-buffer/-/is-buffer-1.1.6.tgz#efaa2ea9daa0d7ab2ea13a97b2b8ad51fefbe8be"
 
@@ -2938,6 +2957,10 @@ jmespath@0.15.0:
 join-component@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/join-component/-/join-component-1.1.0.tgz#b8417b750661a392bee2c2537c68b2a9d4977cd5"
+
+js-base64@^2.1.9:
+  version "2.4.5"
+  resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.4.5.tgz#e293cd3c7c82f070d700fc7a1ca0a2e69f101f92"
 
 js-beautify@1.6.8:
   version "1.6.8"
@@ -3406,6 +3429,14 @@ markdown-it@8.4.1:
     linkify-it "^2.0.0"
     mdurl "^1.0.1"
     uc.micro "^1.0.5"
+
+md5@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/md5/-/md5-2.2.1.tgz#53ab38d5fe3c8891ba465329ea23fac0540126f9"
+  dependencies:
+    charenc "~0.0.1"
+    crypt "~0.0.1"
+    is-buffer "~1.1.1"
 
 mdurl@^1.0.1:
   version "1.0.1"
