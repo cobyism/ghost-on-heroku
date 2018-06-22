@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-ghost-app@0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/ghost-app/-/ghost-app-0.0.2.tgz#b4682fc9b2f2b4e1841d0d67a81996c632e723b3"
+ghost-app@0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/ghost-app/-/ghost-app-0.0.3.tgz#80bfa91dbf47e528bf6247236922a2b8360b724d"
   dependencies:
     lodash "2.4.1"
     when "~2.5.1"

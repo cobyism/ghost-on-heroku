@@ -2049,6 +2049,13 @@ getpass@^0.1.1:
   dependencies:
     assert-plus "^1.0.0"
 
+ghost-app@0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/ghost-app/-/ghost-app-0.0.3.tgz#80bfa91dbf47e528bf6247236922a2b8360b724d"
+  dependencies:
+    lodash "2.4.1"
+    when "~2.5.1"
+
 ghost-cli@1.8.1:
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/ghost-cli/-/ghost-cli-1.8.1.tgz#36cd9fc041b763be441fe73e8c980408f2be2a20"
@@ -3323,6 +3330,10 @@ lodash.some@^4.4.0:
 lodash.unescape@^4.0.0:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/lodash.unescape/-/lodash.unescape-4.0.1.tgz#bf2249886ce514cda112fae9218cdc065211fc9c"
+
+lodash@2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-2.4.1.tgz#5b7723034dda4d262e5a46fb2c58d7cc22f71420"
 
 lodash@4.17.10, lodash@^4.0.0, lodash@^4.13.1, lodash@^4.16.4, lodash@^4.17.10, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0, lodash@^4.8.0:
   version "4.17.10"
@@ -5622,6 +5633,10 @@ wcwidth@^1.0.1:
   resolved "https://registry.yarnpkg.com/wcwidth/-/wcwidth-1.0.1.tgz#f0b0dcf915bc5ff1528afadb2c0e17b532da2fe8"
   dependencies:
     defaults "^1.0.3"
+
+when@~2.5.1:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/when/-/when-2.5.1.tgz#1109685075dc09643109287e6363ae5d73ea7d53"
 
 which-module@^2.0.0:
   version "2.0.0"
