@@ -45,8 +45,8 @@ router.get('/', (req, res, next) => {
   res.redirect(utils.getSubdir())
 })
 
-router.get('/labs/auth/id', passport.authenticate('id'))
-router.get('/labs/auth/id/callback', passport.authenticate('id'), (req, res) => {
+router.get('/auth/id', passport.authenticate('id'))
+router.get('/auth/id/callback', passport.authenticate('id'), (req, res) => {
   const redirectTo = req.session.returnTo || utils.getSubdir()
   res.redirect(redirectTo)
 })
