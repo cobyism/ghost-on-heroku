@@ -10,7 +10,8 @@ const client = new ImgixClient({
 const defaultParams = {
   auto: 'compress,format',
   ch: 'DPR,Width',
-  dpr: 2, // default to 2, client-hint will override
+  w: 1200, // default to 1600, client-hint should override
+  dpr: 2, // default to 2, client-hint should override
 }
 
 module.exports = App.extend({
