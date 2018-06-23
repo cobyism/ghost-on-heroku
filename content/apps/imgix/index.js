@@ -8,9 +8,9 @@ const client = new ImgixClient({
 })
 
 const defaultParams = {
-  auto: 'compress,format',
+  auto: 'format',
   ch: 'DPR,Width',
-  w: 1200, // default to 1600, client-hint should override
+  w: 1000, // default to 1000, client-hint should override
   dpr: 2, // default to 2, client-hint should override
 }
 
@@ -24,17 +24,6 @@ module.exports = App.extend({
       const params = get(options, 'hash.params', '{}')
       const parsedParams = parse(params.replace(/'/g, '"'))
       const imgixParams = Object.assign({}, parsedParams, defaultParams)
-
-      // console.log('***** imgix', {
-      //   path,
-      //   assetHostUrl,
-      //   assetHostRegexp,
-      //   relativePath,
-      //   params,
-      //   parsedParams,
-      //   defaultParams,
-      //   regexpText: assetHostRegexp.test(path)
-      // })
 
       if (assetHostRegexp.test(path)) {
         return client.buildURL(relativePath, imgixParams)
