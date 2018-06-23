@@ -20,24 +20,22 @@ module.exports = App.extend({
       const params = get(options, 'hash.params', '{}')
       const parsedParams = parse(params.replace(/'/g, '"'))
       const imgixParams = Object.assign({}, parsedParams, defaultParams)
+      const assetHostRegexp = new RegExp(process.env.ASSET_HOST_URL)
 
       console.log('***** imgix', {
         path,
         hostUrl: process.env.ASSET_HOST_URL,
+        assetHostRegexp,
         relativePath,
         params,
         parsedParams,
         defaultParams,
-        options
+        regexpText: assetHostRegexp.test(path)
       })
 
-      if (path && /`${process.env.ASSET_HOST_URL}`/.test(path)) {
-
+      if (assetHostRegexp.test(path)) {
         const url = client.buildURL(relativePath, imgixParams)
-
-        console.log('***** imgix.url', {
-          url
-        })
+        console.log('***** imgix.url', { url })
 
         return url
       }
