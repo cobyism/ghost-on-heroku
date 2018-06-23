@@ -16,15 +16,17 @@ const defaultParams = {
 module.exports = App.extend({
   activate: ghost => {
     ghost.helpers.register('imgix_url', (path, options) => {
-      const relativePath = path.replace(process.env.ASSET_HOST_URL, '')
+      const assetHostUrl = process.env.ASSET_HOST_URL
+      const assetHostRegexp = new RegExp(assetHostUrl)
+      const relativePath = path.replace(`https://${assetHostUrl}`, '')
+
       const params = get(options, 'hash.params', '{}')
       const parsedParams = parse(params.replace(/'/g, '"'))
       const imgixParams = Object.assign({}, parsedParams, defaultParams)
-      const assetHostRegexp = new RegExp(process.env.ASSET_HOST_URL)
 
       console.log('***** imgix', {
         path,
-        hostUrl: process.env.ASSET_HOST_URL,
+        assetHostUrl,
         assetHostRegexp,
         relativePath,
         params,
