@@ -25,22 +25,19 @@ module.exports = App.extend({
       const parsedParams = parse(params.replace(/'/g, '"'))
       const imgixParams = Object.assign({}, parsedParams, defaultParams)
 
-      console.log('***** imgix', {
-        path,
-        assetHostUrl,
-        assetHostRegexp,
-        relativePath,
-        params,
-        parsedParams,
-        defaultParams,
-        regexpText: assetHostRegexp.test(path)
-      })
+      // console.log('***** imgix', {
+      //   path,
+      //   assetHostUrl,
+      //   assetHostRegexp,
+      //   relativePath,
+      //   params,
+      //   parsedParams,
+      //   defaultParams,
+      //   regexpText: assetHostRegexp.test(path)
+      // })
 
       if (assetHostRegexp.test(path)) {
-        const url = client.buildURL(relativePath, imgixParams)
-        console.log('***** imgix.url', { url })
-
-        return url
+        return client.buildURL(relativePath, imgixParams)
       }
 
       return path
