@@ -4,7 +4,7 @@ const parse = require('hjson').parse
 const App = require('ghost-app')
 
 const client = new ImgixClient({
-  host: process.env.ASSET_HOST_URL
+  host: process.env.IMGIX_HOST
 })
 
 const defaultParams = {
