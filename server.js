@@ -58,9 +58,6 @@ parentApp.use(
     secret: 'supersecretghostblogsessionwordcats',
     resave: false,
     saveUninitialized: false,
-    // cookie: {
-    //   secure: parentApp.get('env') === 'production',
-    // },
     store: new MemcachedStore({
       servers: [process.env.MEMCACHIER_SERVERS],
       prefix: '_session_'
