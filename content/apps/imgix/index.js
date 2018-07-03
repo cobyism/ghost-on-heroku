@@ -1,7 +1,10 @@
 const get = require('lodash.get')
-const ImgixClient = require('imgix-core-js')
 const parse = require('hjson').parse
 const App = require('ghost-app')
+const ImgixClient = require('imgix-core-js')
+
+const assetHostUrl = process.env.ASSET_HOST_URL
+const assetHostRegexp = new RegExp(assetHostUrl)
 
 const client = new ImgixClient({
   host: process.env.IMGIX_HOST
@@ -17,13 +20,11 @@ const defaultParams = {
 module.exports = App.extend({
   activate: ghost => {
     ghost.helpers.register('imgix_url', (path, options) => {
-      const assetHostUrl = process.env.ASSET_HOST_URL
-      const assetHostRegexp = new RegExp(assetHostUrl)
-      const relativePath = path.replace(assetHostUrl, '')
-
       const params = get(options, 'hash.params', '{}')
       const parsedParams = parse(params.replace(/'/g, '"'))
-      const imgixParams = Object.assign({}, parsedParams, defaultParams)
+
+      const relativePath = path.replace(assetHostUrl, '')
+      const imgixParams = Object.assign({}, params, defaultParams)
 
       if (assetHostRegexp.test(path)) {
         return client.buildURL(relativePath, imgixParams)

@@ -1,0 +1,76 @@
+{
+  "author": {
+    "name": "Colin Meinke",
+    "email": "hello@colinmeinke.com",
+    "url": "https://colinmeinke.com"
+  },
+  "babel": {
+    "plugins": [
+      "transform-object-rest-spread",
+      "add-module-exports"
+    ],
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "4.5"
+          },
+          "exclude": [
+            "transform-es2015-classes"
+          ]
+        }
+      ]
+    ]
+  },
+  "bugs": {
+    "url": "https://github.com/colinmeinke/ghost-storage-adapter-s3/issues"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  },
+  "dependencies": {
+    "aws-sdk": "^2.6.3",
+    "bluebird": "^3.4.6",
+    "ghost-storage-base": "0.0.1"
+  },
+  "description": "An AWS S3 storage adapter for Ghost 0.10+",
+  "devDependencies": {
+    "babel-cli": "^6.14.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-object-rest-spread": "^6.8.0",
+    "babel-preset-env": "^1.6.0",
+    "commitizen": "^2.8.6",
+    "cz-conventional-changelog": "^1.2.0",
+    "semantic-release": "^4.3.5",
+    "snazzy": "^5.0.0",
+    "standard": "^8.3.0"
+  },
+  "homepage": "https://github.com/colinmeinke/ghost-storage-adapter-s3#readme",
+  "license": "ISC",
+  "keywords": [
+    "adapter",
+    "aws",
+    "ghost",
+    "s3",
+    "storage"
+  ],
+  "main": "index.js",
+  "name": "ghost-storage-adapter-s3",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/colinmeinke/ghost-storage-adapter-s3.git"
+  },
+  "scripts": {
+    "build": "babel ./src/index.js --out-file ./index.js",
+    "commit": "git-cz",
+    "fix": "standard --fix",
+    "lint": "standard --verbose | snazzy",
+    "prepublish": "npm run build",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "test": "exit 0"
+  },
+  "version": "2.4.0"
+}
