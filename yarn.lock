@@ -975,6 +975,10 @@ cors@2.8.4:
     object-assign "^4"
     vary "^1"
 
+"crawler-user-agents@https://github.com/monperrus/crawler-user-agents.git":
+  version "1.0.0"
+  resolved "https://github.com/monperrus/crawler-user-agents.git#69609980960199825d06b9212d80bb70b70dce2a"
+
 crc32-stream@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/crc32-stream/-/crc32-stream-2.0.0.tgz#e3cdd3b4df3168dd74e3de3fbbcb7b297fe908f4"
