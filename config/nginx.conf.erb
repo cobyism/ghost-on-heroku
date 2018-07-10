@@ -43,27 +43,27 @@ http {
 
     # root /app; # path to your app
 
-    location /nginx_status {
-      # Turn on nginx stats
-      stub_status on;
+    # location /nginx_status {
+    #   # Turn on nginx stats
+    #   stub_status on;
 
-      # I do not need logs for stats
-      access_log   off;
+    #   # I do not need logs for stats
+    #   access_log   off;
 
-      # Security: Only allow access from 192.168.1.100 IP #
-      # allow 192.168.1.100;
+    #   # Security: Only allow access from 192.168.1.100 IP #
+    #   # allow 192.168.1.100;
 
-      # Send rest of the world to /dev/null #
-      # deny all;
-    }
+    #   # Send rest of the world to /dev/null #
+    #   # deny all;
+    # }
 
-    location / {
-      proxy_set_header  X-Real-IP $remote_addr;
-      proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
-      proxy_set_header  Host $http_host;
-      proxy_redirect    off;
-      proxy_pass        http://app_server;
-    }
+    # location / {
+    #   proxy_set_header  X-Real-IP $remote_addr;
+    #   proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+    #   proxy_set_header  Host $http_host;
+    #   proxy_redirect    off;
+    #   proxy_pass        http://app_server;
+    # }
 
     # location /blog {
     #   # auth_request      /auth;
