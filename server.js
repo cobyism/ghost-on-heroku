@@ -2,10 +2,10 @@ require('dotenv').config({ silent: true })
 
 // const util = require('util')
 // const fs = require('fs')
+const Rollbar = require("rollbar");
 const path = require('path')
 const cluster = require('cluster')
 const ghost = require('ghost')
-
 const utils = require('./node_modules/ghost/core/server/services/url/utils')
 const express = require('express')
 const session = require('express-session')
@@ -13,10 +13,12 @@ const MemcachedStore = require('connect-memjs')(session)
 const passport = require('passport')
 const OAuth2Strategy = require('passport-oauth').OAuth2Strategy
 
+const rollbar = new Rollbar(process.env.ROLLBAR_TOKEN);
 const parentApp = express()
 const router = express.Router()
-
 const isAuthenticated = require('./lib/auth.js').isAuthenticated
+
+parentApp.use(rollbar.errorHandler())
 
 passport.use(
   'id',
