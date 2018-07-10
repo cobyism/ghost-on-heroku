@@ -1,8 +1,8 @@
 require('dotenv').config({ silent: true })
 
 // const util = require('util')
-// const fs = require('fs')
-const Rollbar = require("rollbar");
+const fs = require('fs')
+const Rollbar = require('rollbar')
 const path = require('path')
 const cluster = require('cluster')
 const ghost = require('ghost')
@@ -13,7 +13,7 @@ const MemcachedStore = require('connect-memjs')(session)
 const passport = require('passport')
 const OAuth2Strategy = require('passport-oauth').OAuth2Strategy
 
-const rollbar = new Rollbar(process.env.ROLLBAR_TOKEN);
+const rollbar = new Rollbar(process.env.ROLLBAR_TOKEN)
 const parentApp = express()
 const router = express.Router()
 const isAuthenticated = require('./lib/auth.js').isAuthenticated
@@ -73,7 +73,7 @@ parentApp.use(router)
 parentApp.use(utils.getSubdir(), express.static(path.join(__dirname, 'public')))
 
 // Heroku sets `WEB_CONCURRENCY` to the number of available processor cores.
-var WORKERS = process.env.WEB_CONCURRENCY || 1
+const WORKERS = process.env.WEB_CONCURRENCY || 1
 
 if (cluster.isMaster) {
   // Master starts all workers and restarts them when they exit.
@@ -86,7 +86,7 @@ if (cluster.isMaster) {
     cluster.fork()
   })
 
-  for (var i = 0; i < WORKERS; i++) {
+  for (let i = 0; i < WORKERS; i++) {
     cluster.fork()
   }
 } else {
@@ -96,13 +96,13 @@ if (cluster.isMaster) {
 
     ghostServer.start(parentApp).then(() => {
       // write nginx tmp
-      // fs.writeFile('/tmp/app-initialized', 'Ready to launch nginx', err => {
-      //   if (err) {
-      //     console.log(err)
-      //   } else {
-      //     console.log('The file was saved! Starting Ghost server ...')
-      //   }
-      // })
+      fs.writeFile('/tmp/app-initialized', 'Ready to launch nginx', err => {
+        if (err) {
+          console.log(err)
+        } else {
+          console.log('The file was saved! Starting Ghost server ...')
+        }
+      })
     })
   })
 }
