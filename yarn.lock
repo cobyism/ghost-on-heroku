@@ -2219,9 +2219,9 @@ ghost-storage-base@0.0.3:
   dependencies:
     moment "^2.19.3"
 
-"ghost@github:wework/Ghost#master":
+ghost@1.24.8:
   version "1.24.8"
-  resolved "https://codeload.github.com/wework/Ghost/tar.gz/a57bcb78ee1469aaec0e3763e7efa84cf5b4a730"
+  resolved "https://registry.yarnpkg.com/ghost/-/ghost-1.24.8.tgz#8607d2da306677c7f09d5580f80d1495ad811c77"
   dependencies:
     "@nexes/nql" "0.0.1"
     amperize "0.3.7"
