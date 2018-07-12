@@ -75,6 +75,9 @@ parentApp.use(utils.getSubdir(), express.static(path.join(__dirname, 'public')))
 // Heroku sets `WEB_CONCURRENCY` to the number of available processor cores.
 const WORKERS = process.env.WEB_CONCURRENCY || 1
 
+console.log('**** GHOST.cluster', { isMaster: cluster.isMaster })
+console.log('**** GHOST.WORKERS', WORKERS)
+
 if (cluster.isMaster) {
   // Master starts all workers and restarts them when they exit.
   cluster.on('exit', (worker, code, signal) => {
@@ -87,6 +90,7 @@ if (cluster.isMaster) {
   })
 
   for (let i = 0; i < WORKERS; i++) {
+    console.log('**** GHOST.fork - forking process', i)
     cluster.fork()
   }
 } else {
@@ -95,6 +99,7 @@ if (cluster.isMaster) {
     parentApp.use(utils.getSubdir(), isAuthenticated, ghostServer.rootApp)
 
     ghostServer.start(parentApp).then(() => {
+      console.log('**** GHOST.start - server started!')
       // // write nginx tmp
       // fs.writeFile('/tmp/app-initialized', 'Ready to launch nginx', err => {
       //   if (err) {
