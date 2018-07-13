@@ -851,6 +851,25 @@ The first (most recent) post in the list is styled to be bigger than the others 
     }
 }
 
+/* Image gallery cards (#card) */
+.post-full-content img[src$="#card"] {
+    margin: auto auto 25px;
+    vertical-align: top;
+}
+@media (min-width: 500px) {
+    .post-full-content img[src$="#card"] {
+        display: inline-block;
+        max-width: 49%;
+    }
+}
+@media (min-width: 960px) {
+    .post-full-content img[src$="#card"] {
+        max-width: 32%;
+    }
+}
+.post-full-content img[src$="#card"] + br {
+    display: none;
+}
 
 /* Full bleed images (#full)
 Super neat trick courtesy of @JoelDrapper

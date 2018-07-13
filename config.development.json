@@ -1,5 +1,5 @@
 {
-  "url": "http://localhost:5001/build",
+  "url": "http://localhost:5001/content",
   "server": {
     "port": 5001,
     "host": "127.0.0.1"
