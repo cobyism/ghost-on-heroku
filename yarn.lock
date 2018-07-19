@@ -2444,10 +2444,9 @@ graceful-fs@^4.1.0, graceful-fs@^4.1.10, graceful-fs@^4.1.2, graceful-fs@^4.1.6,
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
 
-gscan@1.5.0, "gscan@github:wework/gscan#validate-imgix":
-  version "1.4.3"
-  uid f9901b529b0d2e87282425eee037f813bbb3dc80
-  resolved "https://codeload.github.com/wework/gscan/tar.gz/f9901b529b0d2e87282425eee037f813bbb3dc80"
+gscan@1.5.0, "gscan@github:wework/gscan#validate-extras":
+  version "1.5.0"
+  resolved "https://codeload.github.com/wework/gscan/tar.gz/41d9752ccfc11f949c0fec72131c04914d779de3"
   dependencies:
     "@tryghost/extract-zip" "1.6.6"
     bluebird "^3.4.6"
@@ -3406,6 +3405,10 @@ lodash.some@^4.4.0:
 lodash.unescape@^4.0.0:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/lodash.unescape/-/lodash.unescape-4.0.1.tgz#bf2249886ce514cda112fae9218cdc065211fc9c"
+
+lodash.uniqby@4.7.0:
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/lodash.uniqby/-/lodash.uniqby-4.7.0.tgz#d99c07a669e9e6d24e1362dfe266c67616af1302"
 
 lodash@2.4.1:
   version "2.4.1"

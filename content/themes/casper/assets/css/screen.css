@@ -91,6 +91,14 @@ body {
 /* 3. Special Template Styles
 /* ---------------------------------------------------------- */
 
+.tags-subnav {
+    text-align: center;
+}
+.tags-subnav .tag {
+    display: inline-block;
+    padding: 10px 15px;
+}
+
 @media (min-width: 900px) {
     .home-template .post-feed,
     .tag-template .post-feed,
@@ -101,6 +109,10 @@ body {
     .home-template .site-nav {
         position: relative;
         top: -70px;
+    }
+    .tags-subnav {
+        position: relative;
+        top: -90px;
     }
 }
 
