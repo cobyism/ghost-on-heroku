@@ -15,6 +15,15 @@
                     A collection of {{plural ../pagination.total empty='posts' singular='% post' plural='% posts'}}
                 {{/if}}
             </h2>
+            <div class="tags-subnav">
+                {{#get "posts" include="tags"}}
+                    {{#tags_subnav posts=posts}}
+                        {{#foreach tags}}
+                            <a href="{{url}}" title="{{name}}" class="tag tag-{{id}} {{slug}}">{{name}}</a>
+                        {{/foreach}}
+                    {{/tags_subnav}}
+                {{/get}}
+            </div>
         </div>
     </div>
 </header>
@@ -23,11 +32,6 @@
 {{!-- The main content area --}}
 <main id="site-main" class="site-main outer">
     <div class="inner">
-        <div class="tags-subnav">
-            {{#foreach (tags_subnav posts slug=tag.slug)}}
-                <a href="{{url}}" title="{{name}}" class="tag tag-{{id}} {{slug}}">{{name}}</a>
-            {{/foreach}}
-        </div>
         <div class="post-feed">
             {{#foreach posts}}
                 {{!-- The tag below includes the markup for each post - partials/post-card.hbs --}}

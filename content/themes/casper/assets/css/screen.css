@@ -96,7 +96,7 @@ body {
 }
 .tags-subnav .tag {
     display: inline-block;
-    padding: 10px 15px;
+    padding: 10px 15px 20px;
 }
 
 @media (min-width: 900px) {
@@ -109,10 +109,6 @@ body {
     .home-template .site-nav {
         position: relative;
         top: -70px;
-    }
-    .tags-subnav {
-        position: relative;
-        top: -90px;
     }
 }
 

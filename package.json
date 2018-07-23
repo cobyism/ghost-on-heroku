@@ -22,7 +22,10 @@
     "ghost-storage-adapter-s3": "^2.3.0",
     "hjson": "3.1.1",
     "imgix-core-js": "1.1.1",
+    "lodash.flatten": "4.4.0",
     "lodash.get": "4.4.2",
+    "lodash.intersection": "4.4.0",
+    "lodash.sortby": "4.7.0",
     "lodash.uniqby": "4.7.0",
     "mysql": "^2.14.1",
     "passport": "0.4.0",
@@ -41,6 +44,7 @@
     "start": "nf start"
   },
   "devDependencies": {
+    "eslint-plugin-you-dont-need-lodash-underscore": "6.3.1",
     "foreman": "3.0.0",
     "ghost-cli": "1.8.1"
   }
