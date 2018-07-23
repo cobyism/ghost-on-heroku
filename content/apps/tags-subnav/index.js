@@ -5,8 +5,6 @@ const flatten = require('lodash.flatten')
 const intersection = require('lodash.intersection')
 const App = require('ghost-app')
 
-const topLevelTagSlugs = ['startup-101', 'foo']
-
 module.exports = App.extend({
   activate: ghost => {
     ghost.helpers.register('tags_subnav', options => {
@@ -34,12 +32,8 @@ module.exports = App.extend({
       })
 
       const allUniqTags = uniqBy(flatten(relevantTags), 'slug')
-      const subnavTags = allUniqTags.filter(tag => !topLevelTagSlugs.includes(tag.slug))
 
-      // console.log('********* subnavTags', subnavTags)
-      // console.log('********* allUniqTags', allUniqTags)
-
-      return options.fn({ tags: sortBy(subnavTags, 'slug') })
+      return options.fn({ tags: sortBy(allUniqTags, 'slug') })
     })
   }
 })
