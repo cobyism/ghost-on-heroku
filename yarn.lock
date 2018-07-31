@@ -1956,9 +1956,9 @@ for-own@^1.0.0:
   dependencies:
     for-in "^1.0.1"
 
-foreman@3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/foreman/-/foreman-3.0.0.tgz#19f89eb6d496ac864767f9938dce6914e20568f5"
+foreman@3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/foreman/-/foreman-3.0.1.tgz#805f28afc5a4bbaf08dbb1f5018c557dcbb8a410"
   dependencies:
     commander "^2.15.1"
     http-proxy "^1.17.0"
@@ -2225,9 +2225,9 @@ ghost-storage-base@0.0.3:
   dependencies:
     moment "^2.19.3"
 
-ghost@1.24.8:
-  version "1.24.8"
-  resolved "https://registry.yarnpkg.com/ghost/-/ghost-1.24.8.tgz#8607d2da306677c7f09d5580f80d1495ad811c77"
+ghost@1.25.3:
+  version "1.25.3"
+  resolved "https://registry.yarnpkg.com/ghost/-/ghost-1.25.3.tgz#d086a1179934202b9be1b6c8b03443369d51461e"
   dependencies:
     "@nexes/nql" "0.0.1"
     amperize "0.3.7"

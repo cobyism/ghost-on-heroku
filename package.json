@@ -17,7 +17,7 @@
     "dotenv": "6.0.0",
     "express": "4.16.3",
     "express-session": "1.15.6",
-    "ghost": "1.24.8",
+    "ghost": "1.25.3",
     "ghost-app": "0.0.3",
     "ghost-storage-adapter-s3": "^2.3.0",
     "hjson": "3.1.1",
@@ -47,7 +47,7 @@
   },
   "devDependencies": {
     "eslint-plugin-you-dont-need-lodash-underscore": "6.3.1",
-    "foreman": "3.0.0",
+    "foreman": "3.0.1",
     "ghost-cli": "1.8.1"
   }
 }
