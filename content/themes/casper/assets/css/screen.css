@@ -352,6 +352,24 @@ The knock-on effect of this is ugly browser-scroll bars at the bottom, so 80px o
     opacity: 1;
 }
 
+.login-button {
+    display: block;
+    padding: 4px 10px;
+    border: #fff 1px solid;
+    color: #fff;
+    font-size: 1.2rem;
+    line-height: 1em;
+    border-radius: 10px;
+    opacity: 0.8;
+    background-color: transparent;
+    margin-top: 10px;
+}
+
+.login-button:hover {
+    text-decoration: none;
+    opacity: 1;
+}
+
 .rss-button {
     opacity: 0.8;
 }
