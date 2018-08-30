@@ -1332,7 +1332,7 @@ dotenv-safe@^6.0.0:
   dependencies:
     dotenv "^6.0.0"
 
-dotenv@6.0.0, dotenv@^6.0.0:
+dotenv@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-6.0.0.tgz#24e37c041741c5f4b25324958ebbc34bca965935"
 
