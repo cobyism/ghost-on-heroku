@@ -2,16 +2,66 @@
 
 Ghost is a free, open, simple blogging platform. Visit the project's website at <http://ghost.org>, or read the docs on <http://support.ghost.org>.
 
-## Ghost version 1.X
+## Local Development
 
-The latest release of Ghost is now supported! Changes include:
+After cloning the repo,
+- `yarn` or `npm install`
+- `yarn global add knex-migrator` or `npm install -g knex-migrator`
 
-  * Requires MySQL database, available through either of two add-ons:
-    * [JawsDB](https://elements.heroku.com/addons/jawsdb) (deploy default)
-    * [ClearDB](https://elements.heroku.com/addons/cleardb)
-  * `HEROKU_URL` config var renamed to `PUBLIC_URL` to avoid using Heroku's namespace
+At this point you'll need to update your environment variables with relevant ID's, TOKENS, etc...
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+`cp .env.example .env` and then get secrets from the Heroku app or another developer.
+
+Ghost
+
+  * `yarn global add ghost-cli@latest or npm install -g ghost-cli`
+  * make sure you are using node v8.9.1 (ghost is particular about the version)
+
+### Database migrations
+
+  * `knex-migrator migrate --mgpath node_modules/ghost`
+
+  Newer versions of Ghost frequently require changes to the database. These changes are automated with a process called **database migrations**.
+
+  When deploying to production:
+    ```bash
+    heroku run knex-migrator migrate --mgpath node_modules/ghost
+    heroku restart
+    ```
+
+  This can be automated by adding the following line to `Procfile`:
+
+  ```
+  release: knex-migrator migrate --mgpath node_modules/ghost
+  ```
+
+  You may see errors logged like:
+
+  > DatabaseIsNotOkError: Migrations are missing. Please run knex-migrator migrate.
+
+  To resolve this error, run the pending migrations and restart to get the app back on-line:
+
+  * `knex-migrator init --mgpath node_modules/ghost`
+
+  You'll also need to download DB Browser for SQLite `https://sqlitebrowser.org/`
+  This step will enable custom apps in the Ghost platform.
+
+  After installation:
+  - Open Database.
+  - Navigate to `labs-blog/content/data`
+  - Select `ghost-local.db`
+  - Click the Browse Data tab.
+  - Select the `settings` table.
+  - Add `"imgix"` to the `active_apps` & `install_apps` keys.
+
+
+  Once you have finished migrating & enabling custom apps:
+
+  * `brew install memcached`
+  * `brew services start memcached`
+  * `yarn start`
+
+
 
 ### Things you should know
 

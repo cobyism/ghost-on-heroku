@@ -1,4 +1,4 @@
-require('dotenv').config({ silent: true })
+require('dotenv-safe').config({ silent: true })
 
 // const util = require('util')
 const fs = require('fs')
