@@ -1,0 +1,55 @@
+{{!< default}}
+{{!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template --}}
+
+{{!-- The big featured header, it uses blog cover image as a BG if available --}}
+<header class="site-header outer {{#if @blog.cover_image}}" style="background-image: url({{imgix_url @blog.cover_image}}){{else}}no-cover{{/if}}">
+    <div class="inner">
+        <div class="site-header-content">
+            <h1 class="site-title">
+                {{#if @blog.logo}}
+                    <img class="site-logo" src="{{@blog.logo}}" alt="{{@blog.title}}" />
+                {{else}}
+                    {{@blog.title}}
+                {{/if}}
+            </h1>
+            <h2 class="site-description">{{@blog.description}}</h2>
+        </div>
+    </div>
+</header>
+
+{{!-- Everything inside the #post tags pulls data from the post --}}
+{{#post}}
+
+<main id="site-main" class="site-main outer" style="background-color: black;">
+    <div class="inner">
+      <div style="display: flex; flex-direction: column; align-items: center; color: white;">
+        <h2>
+          Welcome to the WeWork Labs Content Platform, an exclusive resource for Labs members.
+        </h2>
+        <span style="text-align: center; max-width: 550px;">
+           It's where hundreds of mentors and experts from around the world share their advice and knowledge on how to launch and grow a startup.
+           <br/>
+           <br/>
+           Inside you'll find articles summarizing key takeaways from Labs sessions and workshops, original content from experts in their fields, a library of all of the daily tips we share, the latest news about Labs, and more.
+           <br/>
+           <br/>
+           WeWork Labs members, please log in with your WeWork username and password below. 
+        </span>
+        <br/>
+        <a href="/auth/id"><button class="login-button">Login</button></a>
+        <br/>
+        <span style="font-size: 0.9em;">
+           To learn more about WeWork Labs go to <a href="https://wework.com/labs" target="_blank">wework.com/labs</a>.
+        </span>
+      </div>
+    </div>
+</main>
+
+{{/post}}
+
+<style>
+.site-footer {
+  display: none;
+}
+</style>

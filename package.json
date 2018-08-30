@@ -4,21 +4,50 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/cobyism/ghost-on-heroku.git"
+    "url": "git://github.com/WeConnect/ghost-on-heroku.git"
   },
   "bugs": "https://github.com/TryGhost/Ghost/issues",
   "private": true,
   "version": "1.7.1",
   "dependencies": {
-    "casper": "github:tryghost/Casper#2.1.0",
-    "ghost": "^1.8.0",
+    "connect-memjs": "0.2.1",
+    "cookie-parser": "1.4.3",
+    "crawler-user-agents": "https://github.com/monperrus/crawler-user-agents.git",
+    "device": "0.3.9",
+    "dotenv-safe": "^6.0.0",
+    "express": "4.16.3",
+    "express-session": "1.15.6",
+    "ghost": "1.25.3",
+    "ghost-app": "0.0.3",
     "ghost-storage-adapter-s3": "^2.3.0",
-    "mysql": "^2.14.1"
+    "hjson": "3.1.1",
+    "imgix-core-js": "1.1.1",
+    "lodash": "4.17.10",
+    "lodash.flatten": "4.4.0",
+    "lodash.get": "4.4.2",
+    "lodash.intersection": "4.4.0",
+    "lodash.sortby": "4.7.0",
+    "lodash.uniq": "4.5.0",
+    "lodash.uniqby": "4.7.0",
+    "mysql": "^2.14.1",
+    "passport": "0.4.0",
+    "passport-oauth": "1.0.0",
+    "rollbar": "2.4.2"
+  },
+  "resolutions": {
+    "gscan": "github:wework/gscan#validate-extras"
   },
   "engines": {
-    "node": "6.11.x"
+    "node": "^6.9.0 || ^8.9.0"
   },
   "scripts": {
-    "start": "node server.js"
+    "dev": "node server.js",
+    "debug": "node --inspect server.js",
+    "start": "nf start"
+  },
+  "devDependencies": {
+    "eslint-plugin-you-dont-need-lodash-underscore": "6.3.1",
+    "foreman": "3.0.1",
+    "ghost-cli": "1.8.1"
   }
 }

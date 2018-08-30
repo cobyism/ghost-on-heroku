@@ -1,1 +1,1 @@
-web: npm start --production
+web: node server.js --production
