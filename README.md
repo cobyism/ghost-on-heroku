@@ -13,7 +13,6 @@ After deployment,
 - The app may take a few minutes to come to life
 - Your blog will be publicly accessible at `https://YOURAPPNAME.herokuapp.com`
 - If you subsequently set up a [custom domain](https://devcenter.heroku.com/articles/custom-domains) for your blog, you’ll need to update your Ghost blog’s `PUBLIC_URL` environment variable accordingly, `heroku config:set PUBLIC_URL=https://www.example.com`
-- If you create much content or decide to scale-up the dynos to support more traffic, a more substantial, paid database plan will be required.
 
 #### 🚫🔻 Do not scale-up beyond a single dyno
 
