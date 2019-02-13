@@ -65,6 +65,14 @@ This repository is a [Node.js](https://nodejs.org) web application that specifie
   * Ghost and Casper theme versions are declared in the Node app's [`package.json`](package.json)
   * Scales across processor cores in larger dynos via [Node cluster API](https://nodejs.org/dist/latest-v6.x/docs/api/cluster.html)
 
+## Custom configuration
+
+Ghost supports [configuration with environment variables](https://docs.ghost.org/docs/config#section-running-ghost-with-config-env-variables). Setting custom config is simple with Heroku. For example:
+
+```bash
+heroku config:set privacy__useUpdateCheck=false
+```
+
 ## Updating source code
 
 Optionally after deployment, to push Ghost upgrades or work with source code, clone this repo (or a fork) and connect it with the Heroku app:
