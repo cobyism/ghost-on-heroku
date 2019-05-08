@@ -4,13 +4,6 @@ Ghost is a free, open, simple blogging platform. Visit the project's website at 
 
 ## Ghost version 2.X
 
-The latest release of Ghost is now supported! Changes include:
-
-  * Requires MySQL database, available through either of two add-ons:
-    * [JawsDB](https://elements.heroku.com/addons/jawsdb) (deploy default)
-    * [ClearDB](https://elements.heroku.com/addons/cleardb)
-  * `HEROKU_URL` config var renamed to `PUBLIC_URL` to avoid using Heroku's namespace
-
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 ### Things you should know
@@ -19,8 +12,16 @@ After deployment,
 - First, visit Ghost at `https://YOURAPPNAME.herokuapp.com/ghost` to set up your admin account
 - The app may take a few minutes to come to life
 - Your blog will be publicly accessible at `https://YOURAPPNAME.herokuapp.com`
-- If you subsequently set up a [custom domain](https://devcenter.heroku.com/articles/custom-domains) for your blog, you’ll need to update your Ghost blog’s `PUBLIC_URL` environment variable accordingly
-- If you create much content or decide to scale-up the dynos to support more traffic, a more substantial, paid database plan will be required.
+- If you subsequently set up a [custom domain](https://devcenter.heroku.com/articles/custom-domains) for your blog, you’ll need to update your Ghost blog’s `PUBLIC_URL` environment variable accordingly, `heroku config:set PUBLIC_URL=https://www.example.com`
+
+#### 🚫🔻 Do not scale-up beyond a single dyno
+
+[Ghost does not support multiple processes.](https://docs.ghost.org/faq/clustering-sharding-multi-server/)
+
+If your Ghost app needs to support substantial traffic, then use a CDN add-on:
+
+  * [Fastly](https://elements.heroku.com/addons/fastly)
+  * [Edge](https://elements.heroku.com/addons/edge).
 
 #### Using with file uploads disabled
 
@@ -115,6 +116,10 @@ git push heroku master
 ```
 
 ### Database migrations
+
+Requires MySQL database, available through either of two add-ons:
+  * [JawsDB](https://elements.heroku.com/addons/jawsdb) (deploy default)
+  * [ClearDB](https://elements.heroku.com/addons/cleardb)
 
 Newer versions of Ghost frequently require changes to the database. These changes are automated with a process called **database migrations**.
 

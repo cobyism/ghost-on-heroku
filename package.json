@@ -8,7 +8,7 @@
   },
   "bugs": "https://github.com/TryGhost/Ghost/issues",
   "private": true,
-  "version": "1.7.1",
+  "version": "1.25.5",
   "dependencies": {
     "casper": "github:tryghost/Casper#2.5.1",
     "ghost": "^2.1.2",
@@ -16,7 +16,7 @@
     "mysql": "^2.16.0"
   },
   "engines": {
-    "node": "6.11.x"
+    "node": "10.x"
   },
   "scripts": {
     "start": "node server.js"
