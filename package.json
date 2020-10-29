@@ -20,7 +20,7 @@
     "node": "10.x"
   },
   "scripts": {
-    "postinstall": "cd content\/adapters\/storage\/ghost-google-drive && npm install"
+    "postinstall": "cd content\/adapters\/storage\/ghost-google-drive && npm install",
     "start": "node server.js"
   }
 }
