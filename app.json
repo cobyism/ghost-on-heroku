@@ -35,6 +35,22 @@
     "S3_ASSET_HOST_URL": {
       "description": "Optional custom CDN asset host url, if using S3 file storage.",
       "required": false
+    },
+    "GOOGLE_PRIVATE_KEY_ID" : {
+      "description": "Set your Google Private Key ID to enable Google Drive file storage. Leave blank to disable file uploads.",
+      "required": false
+    },
+    "GOOGLE_PRIVATE_KEY": {
+      "description": "Google Drive Secret Key, if using Google Drive file storage.",
+      "required": false
+    },
+    "GOOGLE_CLIENT_EMAIL": {
+      "description": "Google Drive Cient Email, if using Google Drive file storage.",
+      "required": false
+    },
+    "GOOGLE_CLIENT_ID": {
+      "description": "Google Drive Client ID, if using Google Drive file storage.",
+      "required": false
     }
   }
 }
