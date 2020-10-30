@@ -58,7 +58,7 @@ heroku addons:create bucketeer --app YOURAPPNAME
 heroku config:set S3_BUCKET_REGION=us-east-1 --app YOURAPPNAME
 ```
 
-#### Configuring Google Drive uploads
+#### Configuring Google Drive file uploads
 
 An alternative to S3 file storage is Google Drive file storage, which offers up to 15GB of free storage. To configure Google Drive storage, specify the following environment variables during app deployment, or in the app settings after the app is deployed.
 - `GOOGLE_PRIVATE_KEY_ID`, `GOOGLE_PRIVATE_KEY`, `GOOGLE_CLIENT_EMAIL`, and `GOOGLE_CLIENT_ID`.
