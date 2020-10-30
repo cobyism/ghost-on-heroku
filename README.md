@@ -25,9 +25,9 @@ If your Ghost app needs to support substantial traffic, then use a CDN add-on:
 
 #### Using with file uploads disabled
 
-Heroku app filesystems [aren’t meant for permanent storage](https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem), so file uploads are disabled by default when using this repository to deploy a Ghost blog to Heroku. If you’re using Ghost on Heroku with S3 file uploads disabled, you should leave all environment variables beginning with `S3_…` blank.
+Heroku app filesystems [aren’t meant for permanent storage](https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem), so file uploads are disabled by default when using this repository to deploy a Ghost blog to Heroku. If you’re using Ghost on Heroku with AWS S3 or Google Drive file uploads disabled, you should leave all environment variables beginning with `S3_…` and `GOOGLE_DRIVE_…` blank.
 
-#### Configuring S3 file uploads
+#### Configuring AWS S3 file uploads
 
 To configure S3 file storage, create an S3 bucket on Amazon AWS, and then specify the following details as environment variables on the Heroku deployment page (or add these environment variables to your app after deployment via the Heroku dashboard):
 
@@ -41,7 +41,7 @@ To configure S3 file storage, create an S3 bucket on Amazon AWS, and then specif
 
 Once your app is up and running with these variables in place, you should be able to upload images via the Ghost interface and they’ll be stored in Amazon S3. :sparkles:
 
-##### Provisioning an S3 bucket using an add-on
+##### Provisioning an AWS S3 bucket using an add-on
 
 If you’d prefer not to configure S3 manually, you can provision the [Bucketeer add-on](https://devcenter.heroku.com/articles/bucketeer)
 to get an S3 bucket (Bucketeer starts at $5/mo).
@@ -57,6 +57,12 @@ heroku addons:create bucketeer --app YOURAPPNAME
 # (Find the "Region" in your Bucketeer Add-on's web dashboard.)
 heroku config:set S3_BUCKET_REGION=us-east-1 --app YOURAPPNAME
 ```
+
+#### Configuring Google Drive uploads
+
+An alternative to S3 file storage is Google Drive file storage, which offers up to 15GB of free storage. To configure Google Drive storage, specify the following environment variables during app deployment, or in the app settings after the app is deployed.
+- `GOOGLE_PRIVATE_KEY_ID`, `GOOGLE_PRIVATE_KEY`, `GOOGLE_CLIENT_EMAIL`, and `GOOGLE_CLIENT_ID`.
+Instructions on how to obtain these variables can be found in the [ghost-google-drive](https://github.com/robincsamuel/ghost-google-drive) driver repository.
 
 ### How this works
 
