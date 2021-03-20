@@ -2,7 +2,7 @@
 
 Ghost is a free, open, simple blogging platform. Visit the project's website at <http://ghost.org>, or read the docs on <http://support.ghost.org>.
 
-## Ghost version 3.X
+## Ghost version 4.X
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
@@ -94,7 +94,7 @@ See more about [deploying to Heroku with git](https://devcenter.heroku.com/artic
 
 ### Upgrading Ghost
 
-On each deployment, the Heroku Node/npm build process will **auto-upgrade Ghost to the newest 3.x version**. To prevent this behavior, use npm 5+ (or yarn) to create a lockfile.
+On each deployment, the Heroku Node/npm build process will **auto-upgrade Ghost to the newest 4.x version**. To prevent this behavior, use npm 5+ (or yarn) to create a lockfile.
 
 ```bash
 npm install
